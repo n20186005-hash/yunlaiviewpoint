@@ -266,9 +266,9 @@
       "title": "สถานที่ใกล้เคียง",
       "cta": "สำรวจต่อในเส้นทาง Pai Loop",
       "items": [
-        { "name": "ค่ายทหารญี่ปุ่น", "desc": "สุสานและร่องรอยประวัติศาสตร์สงครามโลกครั้งที่ 2 ใกล้ปาย", "url": "https://maps.app.goo.gl/Fmvh1oXNoSRGTrgG9" },
-        { "name": "บ่อน้ำพุร้อนท่าปาย", "desc": "บ่อน้ำพุร้อนธรรมชาติ ห่างออกไปไม่ไกลจากปาย", "url": "https://maps.app.goo.gl/Fmvh1oXNoSRGTrgG9" },
-        { "name": "ตัวเมืองปาย", "desc": "ร้านค้า ที่พัก และตลาดวัยรุ่นริมแม่น้ำปาย", "url": "https://maps.app.goo.gl/Fmvh1oXNoSRGTrgG9" }
+        { "name": "ค่ายทหารญี่ปุ่น", "desc": "สุสานและร่องรอยประวัติศาสตร์สงครามโลกครั้งที่ 2 ใกล้ปาย", "url": "https://www.google.com/maps/search/?api=1&query=Pai+Memorial+Bridge+Pai+Thailand" },
+        { "name": "บ่อน้ำพุร้อนท่าปาย", "desc": "บ่อน้ำพุร้อนธรรมชาติ ห่างออกไปไม่ไกลจากปาย", "url": "https://www.google.com/maps/search/?api=1&query=Tha+Pai+Hot+Spring+Pai+Thailand" },
+        { "name": "ตัวเมืองปาย", "desc": "ร้านค้า ที่พัก และตลาดวัยรุ่นริมแม่น้ำปาย", "url": "https://www.google.com/maps/search/?api=1&query=Pai+Town+Mae+Hong+Son+Thailand" }
       ]
     }
   },

@@ -266,9 +266,9 @@
       "title": "周边景点",
       "cta": "继续探索拜县环线",
       "items": [
-        { "name": "二战纪念桥", "desc": "拜县附近二战历史遗址与遗迹。", "url": "https://maps.app.goo.gl/Fmvh1oXNoSRGTrgG9" },
-        { "name": "塔佩温泉", "desc": "天然温泉，距拜县车程约不远。", "url": "https://maps.app.goo.gl/Fmvh1oXNoSRGTrgG9" },
-        { "name": "拜县镇", "desc": "商铺、住宿与河畔夜市。", "url": "https://maps.app.goo.gl/Fmvh1oXNoSRGTrgG9" }
+        { "name": "二战纪念桥", "desc": "拜县附近二战历史遗址与遗迹。", "url": "https://www.google.com/maps/search/?api=1&query=Pai+Memorial+Bridge+Pai+Thailand" },
+        { "name": "塔佩温泉", "desc": "天然温泉，距拜县车程约不远。", "url": "https://www.google.com/maps/search/?api=1&query=Tha+Pai+Hot+Spring+Pai+Thailand" },
+        { "name": "拜县镇", "desc": "商铺、住宿与河畔夜市。", "url": "https://www.google.com/maps/search/?api=1&query=Pai+Town+Mae+Hong+Son+Thailand" }
       ]
     }
   },

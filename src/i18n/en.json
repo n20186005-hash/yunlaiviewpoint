@@ -266,9 +266,9 @@
       "title": "Nearby attractions",
       "cta": "Explore more on the Pai Loop",
       "items": [
-        { "name": "WWII memorial bridge", "desc": "Historical site and relics from WWII near Pai.", "url": "https://maps.app.goo.gl/Fmvh1oXNoSRGTrgG9" },
-        { "name": "Tha Pai Hot Spring", "desc": "Natural hot springs, a short drive from Pai.", "url": "https://maps.app.goo.gl/Fmvh1oXNoSRGTrgG9" },
-        { "name": "Pai town", "desc": "Shops, stays and a riverside night market.", "url": "https://maps.app.goo.gl/Fmvh1oXNoSRGTrgG9" }
+        { "name": "WWII memorial bridge", "desc": "Historical site and relics from WWII near Pai.", "url": "https://www.google.com/maps/search/?api=1&query=Pai+Memorial+Bridge+Pai+Thailand" },
+        { "name": "Tha Pai Hot Spring", "desc": "Natural hot springs, a short drive from Pai.", "url": "https://www.google.com/maps/search/?api=1&query=Tha+Pai+Hot+Spring+Pai+Thailand" },
+        { "name": "Pai town", "desc": "Shops, stays and a riverside night market.", "url": "https://www.google.com/maps/search/?api=1&query=Pai+Town+Mae+Hong+Son+Thailand" }
       ]
     }
   },
