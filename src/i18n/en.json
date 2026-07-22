@@ -1,0 +1,430 @@
+{
+  "meta": {
+    "title": "Yun Lai Viewpoint — Sea of Clouds Above Pai",
+    "description": "Guide to Yun Lai Viewpoint, a sea-of-clouds ridge above Pai, Mae Hong Son. Enjoy 360° cloud seas, Yunnan-Chinese tea culture, plus travel tips, best times, and live weather."
+  },
+  "header": {
+    "home": "Home",
+    "about": "Overview",
+    "history": "History",
+    "guide": "Visitor Guide",
+    "food": "Food & Drink",
+    "gallery": "Gallery",
+    "reviews": "Reviews",
+    "map": "Map"
+  },
+  "hero": {
+    "titleMain": "Yun Lai ",
+    "titleAccent": "Viewpoint",
+    "eyebrow": "A Sea of Clouds Above Pai",
+    "subtitle": "Yun Lai Viewpoint rises on a ridge above Pai, Mae Hong Son, offering a 360° panorama of layered mountains and a sea of morning clouds that drifts through the valleys like a slow white ocean.",
+    "rating": "4.4",
+    "reviewCount": "4,987",
+    "coordsLabel": "19.3690°N, 98.3954°E",
+    "viewLocation": "View on Google Maps",
+    "cta1": "Plan your visit",
+    "cta2": "Food & Drink",
+    "boardCategory": "VIEWPOINT",
+    "boardTitle": "Yun Lai",
+    "boardEn": "Yun Lai Viewpoint",
+    "plannerTitle": "Sun & Sky Planner",
+    "liveWeather": "Live from Open-Meteo",
+    "plannerNote": "Based on the viewpoint's real coordinates",
+    "defaultTemp": "21°",
+    "defaultCond": "Clear sky",
+    "defaultWind": "8 km/h",
+    "sunsetIndexLabel": "Today's Viewing Index",
+    "sunsetIndexDefault": "🌤️ Clear · Golden-light 85%",
+    "goldenHourLabel": "Golden Hour (Sunrise)",
+    "defaultGolden": "06:00 – 07:30",
+    "sunsetLabel": "Sunset",
+    "defaultSunset": "18:30",
+    "blueHourLabel": "Blue Hour",
+    "defaultBlue": "19:00 – 19:30",
+    "crowdWarningLabel": "Tip",
+    "defaultTip": "Arrive early for the sea of clouds",
+    "lightCaption": "Times shift with the seasons and weather",
+    "weatherError": "",
+    "goldenChanceLabel": "Golden chance"
+  },
+  "about": {
+    "label": "Overview",
+    "heading": "What is Yun Lai Viewpoint?",
+    "lead": "“Yun Lai” means “clouds arrive” — a name that captures the moment the morning sea of clouds rolls in. Perched on a northern ridge of Pai District in Mae Hong Son, it is one of Northern Thailand's finest spots to watch cloud seas and the sunrise.",
+    "paragraph1": "From the viewpoint you see limestone ranges and evergreen forest rippling outward, with green rice fields and villages far below. On clear mornings the mist settles into a wide white sheet that, in the right conditions, looks like a slow-moving ocean.",
+    "paragraph2": "The area is tied to the Yunnan Chinese communities who migrated to Pai and Mae Hong Son in the 19th–20th centuries. Their tea culture, flower gardens and wooden architecture are woven into the experience of visiting this ridge.",
+    "quote": "“When the mist drifts in, the mountains become islands in a white sea.”",
+    "quoteAuthor": "A local saying",
+    "stats": [
+      { "value": "≈ 1,200 m", "label": "Elevation above sea level" },
+      { "value": "360°", "label": "Panoramic views" },
+      { "value": "05:00–20:00", "label": "Opening hours" }
+    ],
+    "highlights": [
+      { "tag": "🌫️", "title": "Morning sea of clouds", "desc": "Between 06:00–08:00 the mist floods the valleys; best from Nov–Feb in the cool season." },
+      { "tag": "🍵", "title": "Yunnan tea culture", "desc": "Sip hot tea on a wooden terrace amid the clouds, following the local Chinese-Yunnan way of life." },
+      { "tag": "🏔️", "title": "360° panorama", "desc": "See the mountain ranges, the Pai River and open sky in every direction from one ridge." }
+    ],
+    "editorTip": {
+      "tag": "💡 Editor's tip",
+      "text": "Yun Lai suits photographers and nature lovers alike — come at dawn for the best light and the fullest cloud sea.",
+      "ctaLabel": "Plan your visit"
+    }
+  },
+  "eco": {
+    "label": "Ecosystem",
+    "heading": "The Ecosystem on Yun Lai Ridge",
+    "quote": "“The sea of clouds is no accident — it is temperature, humid air and wind carrying valley vapour up the ridge.”",
+    "intro": "At more than 1,200 m, Yun Lai stays cool and humid year-round. The montane forest here shelters plants and wildlife that thrive on mist and moisture.",
+    "microTitle": "Mist, Wind & Microclimates",
+    "micro": [
+      { "title": "Cloud valley", "desc": "The eastern lowlands where vapour condenses into thick morning fog." },
+      { "title": "Cool ridge top", "desc": "The highest point catching cool wind and the widest sea of clouds." },
+      { "title": "Shady tea corner", "desc": "A sheltered wooden terrace that keeps humidity — perfect for tea and mist." }
+    ],
+    "plantsTitle": "Plants on the mountain",
+    "plants": [
+      { "title": "Cloud forest & ferns", "desc": "Moss, ferns and moisture-loving plants blanket the ridge soil.", "items": [ { "name": "Moss & ferns", "desc": "Cover the ridge ground" }, { "name": "Orchids & narrow leaves", "desc": "Love high humidity" } ] },
+      { "title": "Pines & deciduous trees", "desc": "Mixed pine–deciduous forest that shifts colour with the seasons.", "items": [ { "name": "Tall pines", "desc": "Shade and filter the wind" }, { "name": "Deciduous trees", "desc": "Change colour in winter" } ] },
+      { "title": "Cool-climate garden flowers", "desc": "Blooms planted around the campsite and viewing terrace.", "items": [ { "name": "Winter flowers", "desc": "Best in the cool season" }, { "name": "Potted plants", "desc": "Decorate the viewpoint" } ] },
+      { "title": "Tea & herbs", "desc": "Community tea plots and herbs grown the Yunnan-Chinese highland way.", "items": [ { "name": "Highland green tea", "desc": "Grown on terraces" }, { "name": "Herbs", "desc": "Used in food and tea" } ] }
+    ],
+    "wildlifeTitle": "Wildlife you may see",
+    "wildlife": [
+      "Birds and sparrows foraging along the ridge and open lawns at dawn.",
+      "Butterflies and insects that hatch in the humid forest and sun themselves mid-morning.",
+      "Small mammals such as squirrels and field rats foraging in the scrub around the viewpoint."
+    ],
+    "lntTitle": "Leave No Trace",
+    "lntIntro": "The highland nature is fragile. When you visit, please follow Leave No Trace principles.",
+    "lnt": [
+      "Be prepared and stay on marked paths to avoid damaging plants.",
+      "Carry out all rubbish; never leave waste on the soil or in streams.",
+      "Respect wildlife, do not feed them, and keep the forest quiet."
+    ],
+    "lntCheckHint": "Tick ✓ if you are ready to follow these.",
+    "checklist": {
+      "title": "A quick checklist before the climb",
+      "intro": "Small notes that help you travel safely and protect nature.",
+      "items": [
+        { "emoji": "🧥", "name": "Warm jacket", "best": "Dawns are very cold; ridge can drop below 15°C", "rare": "", "rareClass": "" },
+        { "emoji": "👟", "name": "Non-slip shoes", "best": "Paths are damp in the morning; good grip helps", "rare": "", "rareClass": "" },
+        { "emoji": "🗑️", "name": "Personal trash bag", "best": "Take every piece of litter back", "rare": "", "rareClass": "" }
+      ]
+    }
+  },
+  "history": {
+    "label": "History",
+    "heading": "Stories and Roots of Yun Lai",
+    "intro": "The name “Yun Lai” reflects both the geography and the culture of Pai — clouds drifting in to visit, and the people who came from Yunnan.",
+    "blocks": [
+      { "title": "Migration of Yunnan Chinese (19th–20th c.)", "text": "Yunnan-Chinese communities migrated via Burma and Lanna to settle around Pai and Mae Hong Son, bringing tea cultivation, language and wooden architecture. The name Yun Lai is bound to this heritage." },
+      { "title": "A hilltop retreat (mid 20th c.)", "text": "The ridge was a local viewpoint where Pai residents came for cool air and scenery, gradually becoming a stop on the Pai travel loop." },
+      { "title": "The sea of clouds takes centre stage (from 2010)", "text": "Photos of the morning cloud sea shared on social media made Yun Lai known as one of Pai's most beautiful cloud-viewing spots." }
+    ],
+    "legend": {
+      "title": "Local legend",
+      "text": "Villagers say that on a still dawn the mist drifts in until the valley becomes a “white sea.” They named the place Yun Lai — “clouds arrive” — to remember when nature gifts this beauty to those who come to watch."
+    },
+    "didYouKnow": {
+      "title": "Did you know?",
+      "text": "At over 1,200 m, Yun Lai is several degrees cooler than Pai town, even in the hot season."
+    },
+    "folklore": {
+      "title": "Folktale",
+      "tale": "The tale says that birds crossing the sea of clouds bring good news to those who wake early to watch the view.",
+      "shrineTitle": "Shrine on the hill",
+      "shrine": "The viewpoint has a small community shrine where visitors often light incense and make a wish before enjoying the view."
+    }
+  },
+  "guide": {
+    "label": "Visitor Guide",
+    "heading": "Your Guide to Yun Lai",
+    "lead": "Get ready for the best moments on the ridge — from getting there and the best time to visit, to safety tips.",
+    "twoZone": {
+      "title": "Interesting zones",
+      "intro": "The viewpoint splits into different angles suited to different activities.",
+      "difficultyLabel": "Difficulty",
+      "suitsLabel": "Best for",
+      "items": [
+        { "name": "Main viewing deck", "difficulty": "Easy", "suits": "All ages / photographers", "desc": "The highest point with the widest cloud sea and the sunrise, with a wooden terrace and benches." },
+        { "name": "Tea corner", "difficulty": "Easy", "suits": "Relaxing / couples", "desc": "A shady wooden terrace serving hot tea in the Yunnan-Chinese style, ideal for a slow rest." },
+        { "name": "Bridge & surrounding views", "difficulty": "Moderate", "suits": "Walk & view", "desc": "A short walk to different angles around the ridge; short distance, easy to walk." }
+      ]
+    },
+    "scamTip": {
+      "tag": "⚠️ Heads-up",
+      "text": "Park only in the designated lot, and confirm the entry fee directly with viewpoint staff."
+    },
+    "hours": {
+      "tag": "🕔 Opening hours",
+      "time": "05:00–20:00 (daily)",
+      "items": [
+        { "label": "Opens", "value": "05:00" },
+        { "label": "Closes", "value": "20:00" }
+      ]
+    },
+    "fees": {
+      "tag": "💵 Entry & services",
+      "title": "Entry & services",
+      "items": [
+        { "title": "Community fee", "desc": "A small community upkeep fee applies; bring cash." },
+        { "title": "Tea & snacks", "desc": "A hilltop tea corner and snacks are served at the venue's rates." }
+      ]
+    },
+    "transport": {
+      "tag": "🚐 Getting there",
+      "title": "How to reach Yun Lai",
+      "items": [
+        { "title": "Rental car / motorbike", "desc": "About 15–20 min from Pai town; winding uphill road." },
+        { "title": "Taxi / songthaew", "desc": "Charter from Pai via the Pai Loop tourist route." },
+        { "title": "Pai Loop tour", "desc": "Morning packages include Yun Lai, the WWII memorial bridge and other Pai Loop stops." }
+      ]
+    },
+    "photography": {
+      "title": "Photography tips",
+      "intro": "The cloud sea keeps changing — here are the times and angles to watch.",
+      "timesTitle": "Golden windows",
+      "times": [
+        { "period": "06:00–07:30", "desc": "Golden sunrise light and the densest cloud sea." },
+        { "period": "17:30–18:30", "desc": "Beautiful evening light, though the mist is thinner." }
+      ],
+      "spotsTitle": "Recommended spots",
+      "spots": [
+        { "name": "Main wooden terrace", "view": "Wide cloud sea", "tip": "Frame with the terrace as a border." },
+        { "name": "Viewing bridge", "view": "Deep valley angle", "tip": "Shoot diagonally for depth." },
+        { "name": "Campsite lawn", "view": "Open sky and stars", "tip": "Long exposure after dusk." }
+      ],
+      "settingsTitle": "Camera settings",
+      "settings": [
+        { "style": "Cloud sea", "camera": "Aperture f/8–f/11", "phone": "HDR / Pro mode" },
+        { "style": "Golden light", "camera": "ISO 100, bright morning", "phone": "Lower auto exposure" },
+        { "style": "Stars / dusk", "camera": "Tripod, 10–20 sec", "phone": "Night mode" }
+      ],
+      "tipsTitle": "Extra tips",
+      "tips": [
+        "Arrive at dawn to set up your tripod before first light.",
+        "Use foreground blur with the rail or a branch in front.",
+        "Mist wets the lens — wipe and protect it from water.",
+        "Batteries drain faster in the cold; bring a spare."
+      ],
+      "viewLabel": "View",
+      "tipLabel": "Tip",
+      "cameraLabel": "Camera",
+      "phoneLabel": "Phone"
+    },
+    "bestTime": {
+      "title": "Best time to visit",
+      "intro": "Different seasons bring different moods to Yun Lai.",
+      "seasons": [
+        { "tag": "❄️ Cool", "months": "Nov–Feb", "name": "Cloud-sea season", "desc": "Cold weather, densest and widest clouds — best for the sea of clouds." },
+        { "tag": "🌧️ Rainy", "months": "May–Oct", "name": "Rainy season", "desc": "After rain the air is humid and mist appears often, but roads are slippery." },
+        { "tag": "🌤️ Hot", "months": "Mar–Apr", "name": "Hot season", "desc": "Warmer, thinner mist, but wide skies and fewer crowds." }
+      ]
+    },
+    "safety": {
+      "title": "Safety tips",
+      "items": [
+        { "title": "Uphill road", "desc": "The road is winding — drive slowly and watch for dense fog." },
+        { "title": "Slippery ground", "desc": "Mornings are damp; wear non-slip shoes on the paths." },
+        { "title": "Low temperature", "desc": "Dawns are very cold — bring a warm jacket." },
+        { "title": "Litter", "desc": "Take your rubbish back; help protect the highland nature." }
+      ]
+    },
+    "hazeSeason": {
+      "tag": "🌫️ Haze season",
+      "text": "From late rainy to dry season, burning may cause haze. Check air quality before you travel."
+    },
+    "emergency": {
+      "title": "Emergency info",
+      "intro": "Keep these numbers handy for emergencies on the hill.",
+      "items": [
+        { "title": "Viewpoint", "value": "+66 81 024 3982" },
+        { "title": "Police", "value": "191" },
+        { "title": "Ambulance", "value": "1669" },
+        { "title": "Tourist", "value": "1155" }
+      ]
+    },
+    "accessibility": {
+      "title": "Accessibility",
+      "intro": "Yun Lai tries to welcome a wide range of visitors.",
+      "items": [
+        { "title": "Paths", "desc": "Mostly short and flat, but some spots have stairs and damp ground." },
+        { "title": "Parking", "desc": "A parking lot at the viewpoint entrance, convenient for cars." },
+        { "title": "Facilities", "desc": "A tea corner and seats are available, but no direct wheelchair ramp." }
+      ]
+    },
+    "faqTitle": "Frequently asked questions",
+    "faqs": [
+      { "q": "How far is Yun Lai from Pai town?", "a": "About 15–20 minutes by vehicle, on the Pai Loop tourist route." },
+      { "q": "When is the cloud sea most beautiful?", "a": "At dawn 06:00–08:00, especially in the cool season (Nov–Feb)." },
+      { "q": "Is there an entrance fee?", "a": "A small community fee applies; bring cash." },
+      { "q": "Can I camp there?", "a": "There is a campsite and tea corner; contact ahead via the number provided." },
+      { "q": "Is it suitable for kids and seniors?", "a": "Most paths are short and flat, good for all ages, but watch the slippery mornings." }
+    ],
+    "nearby": {
+      "title": "Nearby attractions",
+      "cta": "Explore more on the Pai Loop",
+      "items": [
+        { "name": "WWII memorial bridge", "desc": "Historical site and relics from WWII near Pai.", "url": "https://maps.app.goo.gl/Fmvh1oXNoSRGTrgG9" },
+        { "name": "Tha Pai Hot Spring", "desc": "Natural hot springs, a short drive from Pai.", "url": "https://maps.app.goo.gl/Fmvh1oXNoSRGTrgG9" },
+        { "name": "Pai town", "desc": "Shops, stays and a riverside night market.", "url": "https://maps.app.goo.gl/Fmvh1oXNoSRGTrgG9" }
+      ]
+    }
+  },
+  "food": {
+    "label": "Food & Drink",
+    "heading": "Tea and Food on the Ridge",
+    "lead": "The Yun Lai experience blends Yunnan-Chinese tea culture with simple Northern Thai highland food.",
+    "dishes": [
+      { "tag": "01", "name": "Khao Soi", "price": "฿60", "desc": "Soft egg noodles in a coconut curry broth from the Northern recipe." },
+      { "tag": "02", "name": "Northern sausage (Sai Ua)", "price": "฿80", "desc": "Herbed local sausage served with chili-fish sauce." },
+      { "tag": "03", "name": "Nam Ngiao noodles", "price": "฿70", "desc": "Rice noodles in a thick herbal broth, full of spices." },
+      { "tag": "04", "name": "Coconut sweets", "price": "฿50", "desc": "Thai desserts with young coconut, fitting the garden mood." }
+    ],
+    "quote": {
+      "text": "“Sipping hot tea amid the sea of clouds is how Pai people say — slow down a little.”",
+      "author": "A hilltop tea-shop keeper"
+    }
+  },
+  "gallery": {
+    "label": "Gallery",
+    "heading": "Yun Lai in Pictures",
+    "intro": "A collection of cloud seas, mountain ranges and life on the Yun Lai ridge through different times of day.",
+    "historicalNote": "All photos show the real landscape of Yun Lai Viewpoint, Mae Hong Son.",
+    "credits": "Photos: visitors and the local community.",
+    "alts": [
+      "Morning sea of clouds at Yun Lai",
+      "Layered mountains in the mist",
+      "Sunrise above the valley",
+      "Wooden tea terrace in the mist",
+      "Viewing bridge amid the fog",
+      "Campsite on the ridge",
+      "Cool-climate garden flowers",
+      "Cloud forest and ferns",
+      "Visitors watching the sunrise",
+      "Mist drifting into the valley",
+      "Wide sky at dusk",
+      "A quiet corner in the cool air",
+      "Yunnan-Chinese tea culture",
+      "Birds and butterflies on the ridge",
+      "A short viewing walkway",
+      "360° dawn panorama"
+    ],
+    "viewLocation": "View on Google Maps"
+  },
+  "reviews": {
+    "label": "Reviews",
+    "heading": "What Visitors Say About Yun Lai",
+    "intro": "A summary of visitor voices who came to Yun Lai Viewpoint.",
+    "disclaimer": "Aggregate score from Google Reviews (not verified by us).",
+    "declaration": "The reviews below are drawn from public comments for general reference only.",
+    "featured": [
+      { "text": "Arriving at dawn was so worth it — the cloud sea was like an ocean and the sunrise was stunning.", "source": "— Visitor from public reviews" },
+      { "text": "Sitting with hot tea on the wooden terrace in the mist was the most peaceful moment of my Pai trip.", "source": "— Visitor from public reviews" }
+    ],
+    "items": [
+      { "rating": "5", "name": "Anong S.", "date": "2025-12", "text": "[Cloud sea] Visited in December, the fog was thick and photos turned out amazing." },
+      { "rating": "5", "name": "James T.", "date": "2025-11", "text": "[Sunrise] Woke at 5am and was not disappointed, the golden light was beautiful." },
+      { "rating": "4", "name": "Linda", "date": "2026-01", "text": "[Tea] The hilltop tea shop was great, cool and comfortable." },
+      { "rating": "5", "name": "Peter W.", "date": "2025-10", "text": "[View] Truly 360°, beautiful in every direction." },
+      { "rating": "4", "name": "Kong", "date": "2026-02", "text": "[Road] Winding uphill but not hard to drive, watch the fog." },
+      { "rating": "5", "name": "Mika K.", "date": "2025-12", "text": "[Camping] Camping to watch the morning mist was amazing, recommended." },
+      { "rating": "4", "name": "Somchai", "date": "2025-09", "text": "[Food] They have tea and snacks up top, the viewpoint is great." },
+      { "rating": "5", "name": "Emma R.", "date": "2026-01", "text": "[Photography] The white mist tone is beautiful, come super early, worth it." },
+      { "rating": "4", "name": "Nid", "date": "2025-11", "text": "[Family] Fine with kids, short path but watch the slips." },
+      { "rating": "5", "name": "Daniel L.", "date": "2025-12", "text": "[Peaceful] Quieter than other spots, great to relax." },
+      { "rating": "4", "name": "O", "date": "2026-02", "text": "[Cool season] Very cold, bring a warm jacket." },
+      { "rating": "5", "name": "Yuki H.", "date": "2025-10", "text": "[Value] Tiny entry fee but the view is worth it." }
+    ],
+    "viewLocation": "View on Google Maps"
+  },
+  "mapSection": {
+    "label": "Map",
+    "heading": "Getting to Yun Lai",
+    "lead": "The viewpoint sits in northern Pai District, Mae Hong Son. Use the coordinates below for navigation.",
+    "stats": [
+      { "tag": "From Pai", "value": "≈ 15–20 min", "sub": "by vehicle from town" },
+      { "tag": "Coordinates", "value": "19.3690°N", "sub": "98.3954°E" },
+      { "tag": "Plus Code", "value": "999W+J56", "sub": "Wiang Tai, Pai" }
+    ],
+    "address": "999W+J56, Wiang Tai, Pai District, Mae Hong Son 58130, Thailand",
+    "plusCode": "999W+J56 (Wiang Tai, Pai)",
+    "coords": "19.3690°N, 98.3954°E (elevation ≈ 1,200 m)"
+  },
+  "sources": {
+    "label": "Sources",
+    "heading": "Sources & Credits",
+    "intro": "Site information is gathered from tourism authorities and publicly available open resources, for learning and conservation.",
+    "photoTitle": "Photo Credits",
+    "photoItems": [
+      { "text": "All photos show the real landscape of Yun Lai Viewpoint", "url": "https://maps.app.goo.gl/Fmvh1oXNoSRGTrgG9", "linkLabel": "View location" },
+      { "text": "Photos by visitors and the local community", "url": "", "linkLabel": "" }
+    ],
+    "factTitle": "Reference data",
+    "factText": "Weather from Open-Meteo; review scores summarized from Google Reviews; location from GPS coordinates and Plus Code.",
+    "correctionTitle": "Report a correction",
+    "correctionText": "If you find incorrect information or want to add details, please reach us via the email below.",
+    "correctionMailto": "mailto:n20186005@gmail.com",
+    "correctionCta": "Report a correction",
+    "copyright": "Yun Lai Viewpoint"
+  },
+  "legal": {
+    "privacy": {
+      "title": "Privacy Policy",
+      "updated": "Last updated: 2026",
+      "sections": [
+        { "h": "Information we collect", "p": "This site does not require personal information and does not store identifiable user data." },
+        { "h": "Cookies and analytics", "p": "We may use cookies only to remember language settings; no data is shared with third parties for marketing." },
+        { "h": "External links", "p": "The site links to Google Maps and external sources, each with its own privacy policy." },
+        { "h": "Contact", "p": "For any questions about your data, contact us via the details on the homepage." }
+      ]
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "updated": "Last updated: 2026",
+      "sections": [
+        { "h": "Usage", "p": "All content is provided for educational and informational guidance only." },
+        { "h": "Limitation of liability", "p": "We are not liable for any loss or harm from using this information; verify details before travelling." },
+        { "h": "Copyright", "p": "All content belongs to the site authors; commercial reuse without permission is prohibited." }
+      ]
+    },
+    "cookies": {
+      "title": "Cookie Settings",
+      "updated": "Last updated: 2026",
+      "intro": "Cookies help us remember your language and improve your experience. You can toggle them below.",
+      "categories": [
+        { "h": "Essential cookies", "p": "Required for basic site functions such as language selection.", "status": "On", "subStatus": "Required", "active": true },
+        { "h": "Analytics cookies", "p": "Help us understand usage in an anonymous way.", "status": "Off", "subStatus": "Optional", "active": false }
+      ],
+      "consent": "Pressing Save consents to the use of cookies as selected.",
+      "save": "Save",
+      "rejectAll": "Reject all"
+    }
+  },
+  "footer": {
+    "brand": { "name": "Yun Lai · Sea of Clouds Viewpoint", "tagline": "Where clouds arrive, Pai" },
+    "about": "A guide to Yun Lai Viewpoint — an independent learning resource gathering landscape, ecosystem and community insights about this mountain ridge.",
+    "navTitle": "Menu",
+    "navItems": [
+      { "label": "Home", "href": "#home" },
+      { "label": "Overview", "href": "#about" },
+      { "label": "Ecosystem", "href": "#eco" },
+      { "label": "History", "href": "#history" },
+      { "label": "Visitor Guide", "href": "#guide" },
+      { "label": "Map", "href": "#map" }
+    ],
+    "noteTitle": "Contact",
+    "note": "Open daily 05:00–20:00. Call +66 81 024 3982 for campsite and tea corner.",
+    "mapsLabel": "Google Maps →",
+    "sourcesTitle": "Sources",
+    "sourcesNote": "References from tourism authorities and publicly available open resources.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "cookies": "Cookie Settings",
+    "disclaimerLead": "This site is a non-profit educational attraction guide for learning and conservation.",
+    "unofficial": "Not an official representative or affiliate of Yun Lai Viewpoint or any government body.",
+    "dataSource": "Weather data from Open-Meteo; review scores summarized from Google Reviews.",
+    "copyright": "© 2026 Yun Lai Viewpoint · All rights reserved."
+  }
+}
