@@ -22,6 +22,25 @@ const history = messages.history;
       ))}
     </div>
 
+    <!-- 时间脉络 -->
+    {history.timeline && (
+      <div class="mt-12">
+        <h3 class="font-display text-2xl text-ivory">{history.timelineTitle}</h3>
+        <p class="mt-2 max-w-3xl text-sm text-ivory/70">{history.timelineIntro}</p>
+        <ol class="timeline mt-6 max-w-3xl">
+          {history.timeline.map((step) => (
+            <li class="timeline-item">
+              <div class="flex flex-wrap items-baseline gap-x-3">
+                <span class="font-display text-sm text-goldBright">{step.era}</span>
+                <span class="font-semibold text-ivory">{step.title}</span>
+              </div>
+              <p class="mt-1 text-sm text-ivory/75 leading-relaxed">{step.text}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    )}
+
     <div class="grid md:grid-cols-2 gap-6 mt-6">
       <div class="rounded-2xl bg-gold/10 border border-gold/30 p-6">
         <h3 class="font-display text-xl text-goldBright mb-2">{history.legend.title}</h3>

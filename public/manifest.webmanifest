@@ -1,0 +1,35 @@
+{
+  "name": "Yun Lai Viewpoint — Sea of Clouds, Pai",
+  "short_name": "Yun Lai",
+  "description": "Visitor guide to Yun Lai Viewpoint (จุดชมวิวทะเลหมอกหยุนไหล) in Pai, Mae Hong Son, Thailand — maps, opening details, nearby landmarks and travel tips.",
+  "lang": "en",
+  "dir": "ltr",
+  "id": "/",
+  "start_url": "/th/",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "any",
+  "background_color": "#f5ecd7",
+  "theme_color": "#0d2a2e",
+  "categories": ["travel", "navigation", "lifestyle"],
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    { "name": "Reviews", "short_name": "Reviews", "url": "/th/#reviews" },
+    { "name": "Map & Location", "short_name": "Map", "url": "/th/#map" },
+    { "name": "Gallery", "short_name": "Gallery", "url": "/th/#gallery" }
+  ]
+}

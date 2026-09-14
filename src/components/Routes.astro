@@ -1,0 +1,126 @@
+---
+interface Props {
+  messages: Record<string, any>;
+}
+const { messages } = Astro.props;
+const r = messages.routes;
+
+const itineraries = [
+  { key: 'halfDay', data: r.halfDay, tone: 'light' as const },
+  { key: 'fullDay', data: r.fullDay, tone: 'dark' as const },
+];
+---
+
+<section id="routes" class="py-20 bg-sand text-ink">
+  <div class="max-w-7xl mx-auto px-5">
+    <p class="font-hand text-gold text-xl md:text-2xl">{r.label}</p>
+    <h2 class="font-display font-semibold text-3xl md:text-5xl text-teak mt-2">{r.heading}</h2>
+    <p class="mt-4 max-w-3xl text-ink/80">{r.intro}</p>
+
+    <!-- 按人群定制的游览方案 -->
+    <h3 class="mt-12 font-display text-2xl text-teak">{r.audienceTitle}</h3>
+    <div class="grid lg:grid-cols-3 gap-5 mt-5">
+      {r.audiences.map((a) => (
+        <article class="rounded-2xl bg-white/75 border border-gold/40 p-6 flex flex-col">
+          <div class="flex items-center gap-3">
+            <span class="text-3xl leading-none" aria-hidden="true">{a.icon}</span>
+            <h4 class="font-display text-xl text-teak">{a.name}</h4>
+          </div>
+
+          <dl class="mt-4 grid grid-cols-2 gap-3 text-sm">
+            <div class="rounded-lg bg-teak/5 px-3 py-2">
+              <dt class="text-[11px] uppercase tracking-wide text-ink/50">{r.paceLabel}</dt>
+              <dd class="text-teak font-medium">{a.pace}</dd>
+            </div>
+            <div class="rounded-lg bg-teak/5 px-3 py-2">
+              <dt class="text-[11px] uppercase tracking-wide text-ink/50">{r.durationLabel}</dt>
+              <dd class="text-teak font-medium">{a.duration}</dd>
+            </div>
+            <div class="rounded-lg bg-teak/5 px-3 py-2 col-span-2">
+              <dt class="text-[11px] uppercase tracking-wide text-ink/50">{r.bestTimeLabel}</dt>
+              <dd class="text-teak font-medium">{a.bestTime}</dd>
+            </div>
+          </dl>
+
+          <p class="mt-4 text-sm text-ink/80">{a.summary}</p>
+
+          <div class="mt-5">
+            <h5 class="text-xs font-semibold uppercase tracking-wide text-gold">{r.highlightsLabel}</h5>
+            <ul class="mt-2 space-y-1.5 text-sm text-ink/80">
+              {a.highlights.map((h: string) => (
+                <li class="flex gap-2">
+                  <span class="text-gold" aria-hidden="true">◆</span>
+                  <span>{h}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="mt-5 pt-4 border-t border-gold/40">
+            <h5 class="text-xs font-semibold uppercase tracking-wide text-gold">{r.tipsLabel}</h5>
+            <ul class="mt-2 space-y-1.5 text-sm text-ink/75">
+              {a.tips.map((t: string) => (
+                <li class="flex gap-2">
+                  <span class="text-teak/50" aria-hidden="true">·</span>
+                  <span>{t}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- 通用游览路线（半日 / 全日） -->
+    <h3 class="mt-14 font-display text-2xl text-teak">{r.itineraryTitle}</h3>
+    <div class="grid lg:grid-cols-2 gap-6 mt-5">
+      {itineraries.map(({ data, tone }) => (
+        <article
+          class={`rounded-3xl p-6 md:p-8 ${tone === 'dark' ? 'bg-teak text-ivory' : 'bg-white/80 text-ink border border-gold/40'}`}
+        >
+          <header>
+            <h4 class={`font-display text-2xl ${tone === 'dark' ? 'text-goldBright' : 'text-teak'}`}>
+              {data.name}
+            </h4>
+            <p class={`mt-1 text-sm ${tone === 'dark' ? 'text-ivory/75' : 'text-ink/65'}`}>
+              {r.durationLabel}: <span class="font-semibold">{data.duration}</span>
+            </p>
+            <p class={`mt-1 text-xs ${tone === 'dark' ? 'text-ivory/60' : 'text-ink/55'}`}>{data.suitable}</p>
+          </header>
+
+          <ol class="timeline mt-6">
+            {data.steps.map((step) => (
+              <li class="timeline-item">
+                <div class="flex flex-wrap items-baseline gap-x-3">
+                  <span
+                    class={`font-display text-sm ${tone === 'dark' ? 'text-goldBright' : 'text-gold'}`}
+                  >
+                    {step.time}
+                  </span>
+                  <span class="font-semibold">{step.title}</span>
+                </div>
+                <p class={`mt-1 text-sm ${tone === 'dark' ? 'text-ivory/80' : 'text-ink/75'}`}>
+                  {step.text}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </article>
+      ))}
+    </div>
+
+    <!-- 随身清单 -->
+    <h3 class="mt-14 font-display text-2xl text-teak">{r.packingTitle}</h3>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
+      {r.packing.map((p) => (
+        <div class="rounded-2xl bg-white/70 border border-gold/35 p-4 flex items-start gap-3">
+          <span class="text-2xl leading-none" aria-hidden="true">{p.icon}</span>
+          <div>
+            <div class="font-semibold text-teak">{p.name}</div>
+            <p class="text-sm text-ink/70 mt-0.5">{p.note}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

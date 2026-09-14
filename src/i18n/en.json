@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Yun Lai Viewpoint — Sea of Clouds Above Pai",
-    "description": "Guide to Yun Lai Viewpoint, a sea-of-clouds ridge above Pai, Mae Hong Son. Enjoy 360° cloud seas, Yunnan-Chinese tea culture, plus travel tips, best times, and live weather."
+    "title": "Yun Lai Viewpoint Pai: Sea of Clouds, Sunrise & Tea Guide",
+    "description": "Plan your visit to Yun Lai Viewpoint in Pai, Mae Hong Son. Check opening hours, the 20 THB entry fee, sunrise sea of clouds, tea tasting, and transport tips."
   },
   "header": {
     "home": "Home",
@@ -19,16 +19,24 @@
     "eyebrow": "A Sea of Clouds Above Pai",
     "subtitle": "Yun Lai Viewpoint rises on a ridge above Pai, Mae Hong Son, offering a 360° panorama of layered mountains and a sea of morning clouds that drifts through the valleys like a slow white ocean.",
     "rating": "4.4",
-    "reviewCount": "4,987",
+    "reviewCount": "5,033",
+    "ratingSyncNote": "Rating and review count synced from Google Maps user reviews · September 2026 · ",
+    "ratingSyncLink": "See all reviews on Google Maps ↗",
     "coordsLabel": "19.3690°N, 98.3954°E",
     "viewLocation": "View on Google Maps",
     "cta1": "Plan your visit",
     "cta2": "Food & Drink",
+    "facts": [
+      { "icon": "💵", "label": "Entry", "value": "20 THB, includes a pot of hot tea" },
+      { "icon": "🌅", "label": "Best window", "value": "05:30–07:00 for sunrise & cloud sea" },
+      { "icon": "🕔", "label": "Open", "value": "Daily 05:00–20:00" },
+      { "icon": "🛣️", "label": "The road", "value": "Steep, winding climb from Santichon Village" }
+    ],
     "boardCategory": "VIEWPOINT",
     "boardTitle": "Yun Lai",
     "boardEn": "Yun Lai Viewpoint",
     "plannerTitle": "Sun & Sky Planner",
-    "liveWeather": "Live from Open-Meteo",
+    "liveWeather": "Updating live",
     "plannerNote": "Based on the viewpoint's real coordinates",
     "defaultTemp": "21°",
     "defaultCond": "Clear sky",
@@ -50,6 +58,9 @@
   "about": {
     "label": "Overview",
     "heading": "What is Yun Lai Viewpoint?",
+    "breadcrumbLabel": "Location hierarchy: attraction, city, province, country",
+    "entityIntro": "Welcome to Yun Lai Viewpoint, widely recognized as the central Yun Lai. Located in the heart of Pai, Mae Hong Son, Thailand, this destination serves as a primary hub for travelers visiting the region.",
+    "nearbyCluster": "When visiting Yun Lai Viewpoint, visitors can easily explore surrounding historical landmarks and points of interest, including the WWII Memorial Bridge and Tha Pai Hot Spring.",
     "lead": "“Yun Lai” means “clouds arrive” — a name that captures the moment the morning sea of clouds rolls in. Perched on a northern ridge of Pai District in Mae Hong Son, it is one of Northern Thailand's finest spots to watch cloud seas and the sunrise.",
     "paragraph1": "From the viewpoint you see limestone ranges and evergreen forest rippling outward, with green rice fields and villages far below. On clear mornings the mist settles into a wide white sheet that, in the right conditions, looks like a slow-moving ocean.",
     "paragraph2": "The area is tied to the Yunnan Chinese communities who migrated to Pai and Mae Hong Son in the 19th–20th centuries. Their tea culture, flower gardens and wooden architecture are woven into the experience of visiting this ridge.",
@@ -61,7 +72,7 @@
       { "value": "05:00–20:00", "label": "Opening hours" }
     ],
     "highlights": [
-      { "tag": "🌫️", "title": "Morning sea of clouds", "desc": "Between 06:00–08:00 the mist floods the valleys; best from Nov–Feb in the cool season." },
+      { "tag": "🌫️", "title": "Morning sea of clouds", "desc": "Between 05:30–07:00 the mist floods the valleys; best from Nov–Feb in the cool season." },
       { "tag": "🍵", "title": "Yunnan tea culture", "desc": "Sip hot tea on a wooden terrace amid the clouds, following the local Chinese-Yunnan way of life." },
       { "tag": "🏔️", "title": "360° panorama", "desc": "See the mountain ranges, the Pai River and open sky in every direction from one ridge." }
     ],
@@ -122,6 +133,15 @@
       { "title": "A hilltop retreat (mid 20th c.)", "text": "The ridge was a local viewpoint where Pai residents came for cool air and scenery, gradually becoming a stop on the Pai travel loop." },
       { "title": "The sea of clouds takes centre stage (from 2010)", "text": "Photos of the morning cloud sea shared on social media made Yun Lai known as one of Pai's most beautiful cloud-viewing spots." }
     ],
+    "timelineTitle": "A rough timeline",
+    "timelineIntro": "Read together, these stages explain why Yun Lai is both a natural spectacle and a cultural landscape that is still being lived in.",
+    "timeline": [
+      { "era": "19th – early 20th c.", "title": "Coming down from Yunnan", "text": "Yunnanese traders and mule caravans moved through Burma and Lanna into the Mae Hong Son and Pai basins, settling the valleys and bringing upland tea cultivation, preserving traditions and timber craft to the plateau." },
+      { "era": "Mid 20th c.", "title": "The ridge becomes a local retreat", "text": "Once the dirt track reached the top, Pai residents began climbing before dawn for cool air and cloud views. The ridge became the area's default vantage point." },
+      { "era": "Late 20th c.", "title": "A community-run viewpoint", "text": "The local community took on the upkeep of the trails, the small shrine and the tea corner, sustaining it through contributions and a modest maintenance fee — which set the small, restrained scale you see today." },
+      { "era": "The 2010s", "title": "The cloud sea goes online", "text": "Photographs of the morning cloud sea began circulating online, turning Yun Lai from a local morning habit into one of Pai's best-known cloud-viewing destinations." },
+      { "era": "Today", "title": "Balancing protection and visitation", "text": "The viewpoint is still community-managed with no large-scale commercial development. Terraced tea plots, gardens and the ridge woodland remain the real subject of the view." }
+    ],
     "legend": {
       "title": "Local legend",
       "text": "Villagers say that on a still dawn the mist drifts in until the valley becomes a “white sea.” They named the place Yun Lai — “clouds arrive” — to remember when nature gifts this beauty to those who come to watch."
@@ -154,7 +174,7 @@
     },
     "scamTip": {
       "tag": "⚠️ Heads-up",
-      "text": "Park only in the designated lot, and confirm the entry fee directly with viewpoint staff."
+      "text": "Park only in the designated lot. Entry is 20 THB per person and includes a pot of hot tea."
     },
     "hours": {
       "tag": "🕔 Opening hours",
@@ -168,8 +188,8 @@
       "tag": "💵 Entry & services",
       "title": "Entry & services",
       "items": [
-        { "title": "Community fee", "desc": "A small community upkeep fee applies; bring cash." },
-        { "title": "Tea & snacks", "desc": "A hilltop tea corner and snacks are served at the venue's rates." }
+        { "title": "Entry — 20 THB", "desc": "A 20 THB per-person community upkeep fee, which includes a pot of hot tea. Bring cash." },
+        { "title": "Tea & snacks", "desc": "The hilltop tea corner serves extra tea and simple highland snacks at the venue's own rates." }
       ]
     },
     "transport": {
@@ -178,6 +198,7 @@
       "items": [
         { "title": "From the airport", "desc": "Take a minivan or bus from Chiang Mai International Airport to Pai town (approx. 3 hours), then transfer to a songthaew or rental bike up the hill." },
         { "title": "Rental car / motorbike", "desc": "About 15–20 min from Pai town; winding uphill road." },
+        { "title": "The last climb (Santichon Village)", "desc": "The final stretch up from Santichon Village (หมู่บ้านสันติชล) is steep and winding, with dense fog at dawn. Park below or at the Santichon car park and take a local pickup up, or ride up slowly." },
         { "title": "Taxi / songthaew", "desc": "Charter from Pai via the Pai Loop tourist route." },
         { "title": "Pai Loop tour", "desc": "Morning packages include Yun Lai, the WWII memorial bridge and other Pai Loop stops." }
       ]
@@ -226,7 +247,7 @@
     "safety": {
       "title": "Safety tips",
       "items": [
-        { "title": "Uphill road", "desc": "The road is winding — drive slowly and watch for dense fog." },
+        { "title": "Steep uphill road", "desc": "The climb from Santichon Village is steep and winding with dense fog at dawn. Drive slowly; if you are not used to mountain roads, park below or use local pickup transport." },
         { "title": "Slippery ground", "desc": "Mornings are damp; wear non-slip shoes on the paths." },
         { "title": "Low temperature", "desc": "Dawns are very cold — bring a warm jacket." },
         { "title": "Litter", "desc": "Take your rubbish back; help protect the highland nature." }
@@ -257,14 +278,17 @@
     },
     "faqTitle": "Frequently asked questions",
     "faqs": [
+      { "q": "Where is Yun Lai Viewpoint located?", "a": "Yun Lai Viewpoint is located at 999W+J56, Wiang Tai, Pai District, Mae Hong Son 58130, Thailand, on a ridge about 15–20 minutes from Pai town." },
+      { "q": "Is Yun Lai Viewpoint free to visit?", "a": "No. A community upkeep fee of 20 THB per person applies, which includes a pot of hot tea. Bring cash." },
+      { "q": "Which landmarks are near Yun Lai Viewpoint?", "a": "Around Yun Lai Viewpoint you can also visit the WWII Memorial Bridge and Tha Pai Hot Spring along the Pai Loop." },
       { "q": "How far is Yun Lai from Pai town?", "a": "About 15–20 minutes by vehicle, on the Pai Loop tourist route." },
-      { "q": "When is the cloud sea most beautiful?", "a": "At dawn 06:00–08:00, especially in the cool season (Nov–Feb)." },
-      { "q": "Is there an entrance fee?", "a": "A small community fee applies; bring cash." },
+      { "q": "When is the cloud sea most beautiful?", "a": "In the early morning between 05:30 and 07:00, especially in the cool season (Nov–Feb), when the cloud sea is thickest and the sunrise light is at its best." },
+      { "q": "Is there an entrance fee?", "a": "Yes — 20 THB per person, which includes a pot of hot tea. Bring cash." },
       { "q": "Can I camp there?", "a": "There is a campsite and tea corner; contact ahead via the number provided." },
       { "q": "Is it suitable for kids and seniors?", "a": "Most paths are short and flat, good for all ages, but watch the slippery mornings." }
     ],
     "nearby": {
-      "title": "Nearby attractions",
+      "title": "Landmarks & Attractions Around Yun Lai",
       "cta": "Explore more on the Pai Loop",
       "items": [
         { "name": "WWII memorial bridge", "desc": "Historical site and relics from WWII near Pai.", "url": "https://www.google.com/maps/search/?api=1&query=Pai+Memorial+Bridge+Pai+Thailand" },
@@ -294,6 +318,7 @@
     "intro": "A collection of cloud seas, mountain ranges and life on the Yun Lai ridge through different times of day.",
     "historicalNote": "All photos show the real landscape of Yun Lai Viewpoint, Mae Hong Son.",
     "credits": "Photos: visitors and the local community.",
+    "imageCopyright": "Image ownership: all images displayed on this website remain the property and copyright of their original photographers.",
     "alts": [
       "Morning sea of clouds at Yun Lai",
       "Layered mountains in the mist",
@@ -319,10 +344,13 @@
     "heading": "What Visitors Say About Yun Lai",
     "intro": "A summary of visitor voices who came to Yun Lai Viewpoint.",
     "disclaimer": "Aggregate score from Google Reviews (not verified by us).",
+    "syncNote": "Rating and review count synced from Google Maps user reviews · September 2026 · ",
+    "syncLinkLabel": "See all reviews on Google Maps ↗",
+    "sourceNote": "Synced from Google Maps user reviews, last synced September 2026; copyright belongs to the original authors and Google Maps.",
     "declaration": "The reviews below are drawn from public comments for general reference only.",
     "featured": [
-      { "text": "Arriving at dawn was so worth it — the cloud sea was like an ocean and the sunrise was stunning.", "source": "— Visitor from public reviews" },
-      { "text": "Sitting with hot tea on the wooden terrace in the mist was the most peaceful moment of my Pai trip.", "source": "— Visitor from public reviews" }
+      { "text": "Arriving at dawn was so worth it — the cloud sea was like an ocean and the sunrise was stunning.", "source": "— Visitor review published on Google Maps" },
+      { "text": "Sitting with hot tea on the wooden terrace in the mist was the most peaceful moment of my Pai trip.", "source": "— Visitor review published on Google Maps" }
     ],
     "items": [
       { "rating": "5", "name": "Anong S.", "date": "2025-12", "text": "[Cloud sea] Visited in December, the fog was thick and photos turned out amazing." },
@@ -338,11 +366,12 @@
       { "rating": "4", "name": "O", "date": "2026-02", "text": "[Cool season] Very cold, bring a warm jacket." },
       { "rating": "5", "name": "Yuki H.", "date": "2025-10", "text": "[Value] Tiny entry fee but the view is worth it." }
     ],
+    "viewAll": "View all reviews on Google Maps",
     "viewLocation": "View on Google Maps"
   },
   "mapSection": {
     "label": "Map",
-    "heading": "Getting to Yun Lai",
+    "heading": "Location & How to Visit Yun Lai in Pai",
     "lead": "The viewpoint sits in northern Pai District, Mae Hong Son. Use the coordinates below for navigation.",
     "stats": [
       { "tag": "From Pai", "value": "≈ 15–20 min", "sub": "by vehicle from town" },
@@ -351,7 +380,9 @@
     ],
     "address": "999W+J56, Wiang Tai, Pai District, Mae Hong Son 58130, Thailand",
     "plusCode": "999W+J56 (Wiang Tai, Pai)",
-    "coords": "19.3690°N, 98.3954°E (elevation ≈ 1,200 m)"
+    "coords": "19.3690°N, 98.3954°E (elevation ≈ 1,200 m)",
+    "officialNote": "For official updates and regional tourism information, visit",
+    "officialLinkLabel": "Thailand / Mae Hong Son Official Tourism Portal"
   },
   "sources": {
     "label": "Sources",
@@ -363,7 +394,12 @@
       { "text": "Photos by visitors and the local community", "url": "", "linkLabel": "" }
     ],
     "factTitle": "Reference data",
-    "factText": "Weather from Open-Meteo; review scores summarized from Google Reviews; location from GPS coordinates and Plus Code.",
+    "factText": "Weather readings update hourly at the viewpoint's own coordinates; review scores and counts synced from Google Maps user reviews (September 2026); location from GPS coordinates and Plus Code.",
+    "reviewTitle": "Reviews · Synced September 2026",
+    "reviewText": "Rating and reviews synced from Google Maps user reviews · September 2026; copyright belongs to the original authors and Google Maps.",
+    "reviewLinkLabel": "View all reviews on Google Maps ↗",
+    "imageCopyrightTitle": "Image ownership",
+    "imageCopyrightText": "All images displayed on this website remain the property and copyright of their original photographers.",
     "correctionTitle": "Report a correction",
     "correctionText": "If you find incorrect information or want to add details, please reach us via the email below.",
     "correctionMailto": "mailto:n20186005@gmail.com",
@@ -410,6 +446,11 @@
     "navItems": [
       { "label": "Home", "href": "#home" },
       { "label": "Overview", "href": "#about" },
+      { "label": "Live weather", "href": "#weather" },
+      { "label": "Seasonal strategy", "href": "#seasons" },
+      { "label": "Routes", "href": "#routes" },
+      { "label": "Visitor services", "href": "#services" },
+      { "label": "Stewardship", "href": "#responsibility" },
       { "label": "Ecosystem", "href": "#eco" },
       { "label": "History", "href": "#history" },
       { "label": "Visitor Guide", "href": "#guide" },
@@ -425,7 +466,10 @@
     "cookies": "Cookie Settings",
     "disclaimerLead": "This site is a non-profit educational attraction guide for learning and conservation.",
     "unofficial": "Not an official representative or affiliate of Yun Lai Viewpoint or any government body.",
-    "dataSource": "Weather data from Open-Meteo; review scores summarized from Google Reviews.",
+    "dataSource": "Weather readings update hourly at the viewpoint's own coordinates; review scores and counts synced from Google Maps user reviews (September 2026).",
+    "reviewSourceNote": "Rating and reviews synced from Google Maps user reviews · September 2026. ",
+    "reviewSourceLink": "View all reviews on Google Maps ↗",
+    "imageCopyright": "Image ownership: all images displayed on this website remain the property and copyright of their original photographers.",
     "copyright": "© 2026 Yun Lai Viewpoint · All rights reserved."
   }
 }

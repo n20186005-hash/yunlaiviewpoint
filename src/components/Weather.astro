@@ -1,0 +1,553 @@
+---
+import { siteConfig } from '../config';
+import { htmlLang, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  messages: Record<string, any>;
+}
+const { lang, messages } = Astro.props;
+const w = messages.weather;
+const locale = htmlLang[lang];
+const { lat, lng } = siteConfig.coords;
+
+const FORECAST_ENDPOINT = 'https://api.open-meteo.com/v1/forecast';
+
+type Day = {
+  date: string;
+  code: number;
+  tMax: number;
+  tMin: number;
+  sunrise: string;
+  sunset: string;
+  pop: number;
+  windMax: number;
+  uvMax: number;
+};
+
+type Reading = {
+  temp: number;
+  apparent: number;
+  humidity: number;
+  wind: number;
+  gust: number;
+  precip: number;
+  code: number;
+  cloud: number;
+  pressure: number;
+  isDay: boolean;
+  visibilityKm: number;
+  time: string;
+  days: Day[];
+};
+
+/**
+ * Fetched once on the server while the page is generated, then rendered into
+ * the HTML. A small client script refreshes the numbers afterwards so visitors
+ * always see the current hour rather than the moment the site was built.
+ */
+const buildRequestUrl = (): URL => {
+  const url = new URL(FORECAST_ENDPOINT);
+  url.searchParams.set('latitude', String(lat));
+  url.searchParams.set('longitude', String(lng));
+  url.searchParams.set(
+    'current',
+    'temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,weather_code,cloud_cover,pressure_msl,wind_speed_10m,wind_gusts_10m'
+  );
+  url.searchParams.set('hourly', 'visibility');
+  url.searchParams.set(
+    'daily',
+    'weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_probability_max,wind_speed_10m_max,uv_index_max'
+  );
+  url.searchParams.set('timezone', 'Asia/Bangkok');
+  url.searchParams.set('forecast_days', '7');
+  url.searchParams.set('wind_speed_unit', 'kmh');
+  return url;
+};
+
+const readVisibilityKm = (payload: any): number => {
+  const times: string[] = payload?.hourly?.time ?? [];
+  const values: (number | null)[] = payload?.hourly?.visibility ?? [];
+  const stamp: string | undefined = payload?.current?.time;
+  let index = stamp ? times.indexOf(stamp) : -1;
+  if (index < 0) index = times.findIndex((t) => t >= (stamp ?? ''));
+  if (index < 0) index = 0;
+  const metres = values[index] ?? values.find((v) => typeof v === 'number') ?? 10000;
+  return Math.round(((metres as number) / 1000) * 10) / 10;
+};
+
+const normalize = (payload: any): Reading => {
+  const c = payload.current ?? {};
+  const d = payload.daily ?? {};
+  const days: Day[] = (d.time ?? []).map((date: string, i: number) => ({
+    date,
+    code: Number(d.weather_code?.[i] ?? 0),
+    tMax: Number(d.temperature_2m_max?.[i] ?? 0),
+    tMin: Number(d.temperature_2m_min?.[i] ?? 0),
+    sunrise: String(d.sunrise?.[i] ?? ''),
+    sunset: String(d.sunset?.[i] ?? ''),
+    pop: Number(d.precipitation_probability_max?.[i] ?? 0),
+    windMax: Number(d.wind_speed_10m_max?.[i] ?? 0),
+    uvMax: Number(d.uv_index_max?.[i] ?? 0),
+  }));
+  return {
+    temp: Number(c.temperature_2m ?? 0),
+    apparent: Number(c.apparent_temperature ?? 0),
+    humidity: Number(c.relative_humidity_2m ?? 0),
+    wind: Number(c.wind_speed_10m ?? 0),
+    gust: Number(c.wind_gusts_10m ?? 0),
+    precip: Number(c.precipitation ?? 0),
+    code: Number(c.weather_code ?? 0),
+    cloud: Number(c.cloud_cover ?? 0),
+    pressure: Number(c.pressure_msl ?? 0),
+    isDay: c.is_day === 1 || c.is_day === true,
+    visibilityKm: readVisibilityKm(payload),
+    time: String(c.time ?? ''),
+    days,
+  };
+};
+
+/** Shown only if the forecast service cannot be reached while building. */
+const fallbackReading = (): Reading => {
+  const today = new Date();
+  const iso = (offset: number) => {
+    const d = new Date(today.getTime() + offset * 86400000);
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  };
+  return {
+    temp: 19,
+    apparent: 19,
+    humidity: 88,
+    wind: 6,
+    gust: 12,
+    precip: 0,
+    code: 45,
+    cloud: 60,
+    pressure: 1012,
+    isDay: false,
+    visibilityKm: 8,
+    time: `${iso(0)}T06:00`,
+    days: Array.from({ length: 7 }).map((_, i) => ({
+      date: iso(i),
+      code: 45,
+      tMax: 28,
+      tMin: 13,
+      sunrise: `${iso(i)}T06:30`,
+      sunset: `${iso(i)}T18:30`,
+      pop: 10,
+      windMax: 12,
+      uvMax: 8,
+    })),
+  };
+};
+
+let reading: Reading;
+try {
+  const response = await fetch(buildRequestUrl(), {
+    signal: AbortSignal.timeout(8000),
+    headers: { accept: 'application/json' },
+  });
+  reading = response.ok ? normalize(await response.json()) : fallbackReading();
+} catch {
+  reading = fallbackReading();
+}
+
+const ICONS: Record<number, string> = {
+  0: '☀️', 1: '🌤️', 2: '⛅', 3: '☁️',
+  45: '🌫️', 48: '🌫️',
+  51: '🌦️', 53: '🌦️', 55: '🌧️', 56: '🌧️', 57: '🌧️',
+  61: '🌧️', 63: '🌧️', 65: '🌧️', 66: '🌧️', 67: '🌧️',
+  71: '🌨️', 73: '🌨️', 75: '❄️', 77: '🌨️',
+  80: '🌦️', 81: '🌧️', 82: '⛈️', 85: '🌨️', 86: '🌨️',
+  95: '⛈️', 96: '⛈️', 99: '⛈️',
+};
+const icon = (code: number) => ICONS[code] ?? '🌥️';
+
+const RAIN_CODES = new Set([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82, 95, 96, 99]);
+const FOG_CODES = new Set([45, 48]);
+
+const codeLabel = (code: number): string => w.wmo?.[String(code)] ?? '';
+
+/** Weighted cloud-sea potential, 0–100. */
+const clamp = (n: number, min: number, max: number) => Math.max(min, Math.min(max, n));
+const cloudSeaScore = (
+  minTemp: number,
+  humidity: number,
+  windSpeed: number,
+  cloudCover: number
+): number => {
+  const temp = clamp(35 - Math.abs(13 - minTemp) * 2.6, 0, 35);
+  const humid = clamp(((humidity - 60) / 35) * 30, 0, 30);
+  const wind = clamp(20 - (windSpeed / 15) * 20, 0, 20);
+  const sky = clamp(((100 - cloudCover) / 100) * 15, 0, 15);
+  return Math.round(temp + humid + wind + sky);
+};
+
+const levelIndex = (score: number) => (score >= 75 ? 0 : score >= 55 ? 1 : score >= 35 ? 2 : 3);
+
+const todayMin = reading.days[0]?.tMin ?? reading.temp;
+const score = cloudSeaScore(todayMin, reading.humidity, reading.wind, reading.cloud);
+const level = levelIndex(score);
+
+const adviceKey = RAIN_CODES.has(reading.code) && reading.precip > 0
+  ? 'rain'
+  : FOG_CODES.has(reading.code)
+    ? 'fog'
+    : reading.temp >= 30
+      ? 'hot'
+      : (['excellent', 'good', 'fair', 'low'] as const)[level];
+const advice = w.advice?.[adviceKey] ?? '';
+
+const dressKey = reading.temp < 18 ? 'dressCold' : reading.temp <= 26 ? 'dressMild' : 'dressWarm';
+
+const weekday = (date: string) =>
+  new Date(`${date}T12:00:00`).toLocaleDateString(locale, { weekday: 'short' });
+const dayMonth = (date: string) =>
+  new Date(`${date}T12:00:00`).toLocaleDateString(locale, { day: 'numeric', month: 'short' });
+const clock = (stamp: string) => (stamp.includes('T') ? stamp.slice(11, 16) : '');
+const round = (n: number) => Math.round(n);
+const oneDecimal = (n: number) => (Math.round(n * 10) / 10).toFixed(1);
+
+const clientConfig = JSON.stringify({
+  endpoint: FORECAST_ENDPOINT,
+  latitude: Number(lat),
+  longitude: Number(lng),
+  locale,
+  refreshAfterMinutes: 20,
+  labels: w.wmo ?? {},
+  levels: w.viewingLevels ?? [],
+  advice: w.advice ?? {},
+  nowText: w.updatedAt ?? '',
+  todayLabel: w.today ?? '',
+  tomorrowLabel: w.tomorrow ?? '',
+  offlineText: w.offline ?? '',
+});
+
+const metrics = [
+  { key: 'feelsLike', value: `${round(reading.apparent)}°` },
+  { key: 'humidity', value: `${round(reading.humidity)}%` },
+  { key: 'windLabel', value: `${round(reading.wind)} km/h` },
+  { key: 'gust', value: `${round(reading.gust)} km/h` },
+  { key: 'visibility', value: `${oneDecimal(reading.visibilityKm)} km` },
+  { key: 'cloudCover', value: `${round(reading.cloud)}%` },
+  { key: 'precipitation', value: `${oneDecimal(reading.precip)} mm` },
+  { key: 'pressure', value: `${round(reading.pressure)} hPa` },
+];
+---
+
+<section id="weather" class="py-20 bg-teakDeep text-ivory">
+  <div class="max-w-7xl mx-auto px-5">
+    <p class="font-hand text-gold text-xl md:text-2xl">{w.label}</p>
+    <h2 class="font-display font-semibold text-3xl md:text-5xl text-ivory mt-2">{w.heading}</h2>
+    <p class="mt-4 max-w-3xl text-ivory/80">{w.intro}</p>
+
+    <!-- 当前读数（服务端渲染，前端按需增量刷新） -->
+    <div class="mt-10 weather-now rounded-3xl p-6 md:p-8 grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] gap-8">
+      <div>
+        <h3 class="font-display text-xl text-goldBright">{w.nowTitle}</h3>
+
+        <div class="mt-5 flex items-center gap-5">
+          <span class="text-5xl md:text-6xl leading-none" data-w="cond-icon" aria-hidden="true">
+            {icon(reading.code)}
+          </span>
+          <div>
+            <div class="font-display text-5xl md:text-6xl leading-none" data-w="temp">
+              {round(reading.temp)}°
+            </div>
+            <div class="mt-1 text-ivory/80" data-w="cond">{codeLabel(reading.code)}</div>
+          </div>
+        </div>
+
+        <p class="mt-4 text-xs text-ivory/55">
+          <span>{w.updatedAt} </span>
+          <time data-w="updated" datetime={reading.time}>{clock(reading.time)}</time>
+          <span class="sr-only"> · </span>
+          <span data-w="offline">{w.syncNote}</span>
+        </p>
+
+        <!-- 云海观测指数 -->
+        <div class="mt-6">
+          <div class="flex items-baseline justify-between gap-3">
+            <h4 class="font-display text-lg text-goldBright">{w.viewingTitle}</h4>
+            <span class="font-display text-2xl text-goldBright">
+              <span data-w="viewing-score">{score}</span><span class="text-sm text-ivory/60">/100</span>
+            </span>
+          </div>
+          <div class="viewing-meter mt-2" role="img" aria-label={w.viewingTitle}>
+            <span data-w="viewing-bar" style={`width:${score}%`}></span>
+          </div>
+          <p class="mt-2 text-sm text-ivory/85">
+            <span class="font-semibold text-goldBright" data-w="viewing-level">
+              {(w.viewingLevels ?? [])[level] ?? ''}
+            </span>
+            <span class="text-ivory/45"> · </span>
+            <span data-w="viewing-advice">{advice}</span>
+          </p>
+          <p class="mt-1 text-xs text-ivory/45">{w.viewingFormula}</p>
+        </div>
+
+        <!-- 穿衣建议 -->
+        <div class="mt-6 rounded-2xl border border-gold/25 bg-ivory/5 p-4">
+          <p class="font-semibold text-ivory">
+            {w.dressTitle}
+            <span class="ml-2 text-xs font-normal text-ivory/60">
+              {w.dressNow}: <span data-w="dress-temp">{round(reading.temp)}°</span>
+            </span>
+          </p>
+          <p class="mt-1 text-sm text-ivory/80" data-w="dress-note">{w[dressKey]}</p>
+        </div>
+      </div>
+
+      <!-- 指标网格 -->
+      <div>
+        <h3 class="font-display text-xl text-goldBright md:hidden mb-3">{w.nowTitle}</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-3">
+          {metrics.map((m) => (
+            <div class="weather-metric p-3">
+              <div class="text-[11px] uppercase tracking-wide text-ivory/55">{w[m.key]}</div>
+              <div class="mt-1 font-display text-lg text-ivory" data-w={m.key}>{m.value}</div>
+            </div>
+          ))}
+          <div class="weather-metric p-3">
+            <div class="text-[11px] uppercase tracking-wide text-ivory/55">{w.sunrise}</div>
+            <div class="mt-1 font-display text-lg text-ivory" data-w="sunrise">
+              {clock(reading.days[0]?.sunrise ?? '')}
+            </div>
+          </div>
+          <div class="weather-metric p-3">
+            <div class="text-[11px] uppercase tracking-wide text-ivory/55">{w.sunset}</div>
+            <div class="mt-1 font-display text-lg text-ivory" data-w="sunset">
+              {clock(reading.days[0]?.sunset ?? '')}
+            </div>
+          </div>
+          <div class="weather-metric p-3">
+            <div class="text-[11px] uppercase tracking-wide text-ivory/55">{w.uvIndex}</div>
+            <div class="mt-1 font-display text-lg text-ivory" data-w="uvIndex">
+              {round(reading.days[0]?.uvMax ?? 0)}
+            </div>
+          </div>
+          <div class="weather-metric p-3">
+            <div class="text-[11px] uppercase tracking-wide text-ivory/55">{w.dayTemps}</div>
+            <div class="mt-1 font-display text-lg text-ivory" data-w="dayTemps">
+              {round(reading.days[0]?.tMax ?? 0)}° / {round(reading.days[0]?.tMin ?? 0)}°
+            </div>
+          </div>
+        </div>
+        <p class="mt-4 text-xs text-ivory/45">{w.sourceNote}</p>
+      </div>
+    </div>
+
+    <!-- 未来 7 日预报 -->
+    <h3 class="mt-12 font-display text-2xl text-ivory">{w.forecastTitle}</h3>
+    <p class="mt-1 text-xs text-ivory/45">{w.expandNote}</p>
+
+    <div class="mt-5 no-scrollbar overflow-x-auto -mx-5 px-5">
+      <div class="flex gap-3 min-w-max pb-1">
+        {reading.days.map((d, i) => {
+          const dayScore = cloudSeaScore(d.tMin, reading.humidity, d.windMax, clamp(100 - d.pop, 0, 100));
+          return (
+            <article
+              class={`forecast-card w-[152px] shrink-0 p-4 text-ink ${i === 0 ? 'is-today' : ''}`}
+              data-day={i}
+            >
+              <div class="text-xs font-semibold text-ink/60">
+                {i === 0 ? w.today : i === 1 ? w.tomorrow : weekday(d.date)}
+              </div>
+              <div class="text-[11px] text-ink/45">{dayMonth(d.date)}</div>
+              <div class="mt-2 text-3xl leading-none" data-w="d-icon" aria-hidden="true">{icon(d.code)}</div>
+              <div class="mt-2 text-xs text-ink/70 min-h-[2.4em]" data-w="d-cond">{codeLabel(d.code)}</div>
+              <div class="mt-2 font-display text-lg text-teak">
+                <span data-w="d-max">{round(d.tMax)}°</span>
+                <span class="text-ink/40"> / </span>
+                <span class="text-ink/60" data-w="d-min">{round(d.tMin)}°</span>
+              </div>
+              <div class="mt-2 text-[11px] text-ink/60">
+                {w.precipChance} <span class="font-semibold" data-w="d-pop">{round(d.pop)}%</span>
+              </div>
+              <div class="mt-3 pt-3 border-t border-gold/40">
+                <div class="text-[10px] uppercase tracking-wide text-ink/45">{w.viewingTitle}</div>
+                <div class="mt-1 flex items-center gap-2">
+                  <span class="text-xs font-semibold text-teak" data-w="d-score">{dayScore}</span>
+                  <span class="text-[11px] text-ink/55" data-w="d-level">
+                    {(w.viewingLevels ?? [])[levelIndex(dayScore)] ?? ''}
+                  </span>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+
+  <script type="application/json" id="weather-config" set:html={clientConfig} />
+</section>
+
+<script>
+  type Config = {
+    endpoint: string;
+    latitude: number;
+    longitude: number;
+    locale: string;
+    refreshAfterMinutes: number;
+    labels: Record<string, string>;
+    levels: string[];
+    advice: Record<string, string>;
+    nowText: string;
+    todayLabel: string;
+    tomorrowLabel: string;
+    offlineText: string;
+  };
+
+  const node = document.getElementById('weather-config');
+  if (node?.textContent) {
+    const cfg: Config = JSON.parse(node.textContent);
+    const section = document.getElementById('weather');
+    const set = (name: string, value: string) => {
+      section?.querySelectorAll(`[data-w="${name}"]`).forEach((el) => {
+        el.textContent = value;
+      });
+    };
+    const round = (n: number) => Math.round(n);
+    const clamp = (n: number, min: number, max: number) => Math.max(min, Math.min(max, n));
+    const score = (minTemp: number, humidity: number, wind: number, cloud: number) =>
+      Math.round(
+        clamp(35 - Math.abs(13 - minTemp) * 2.6, 0, 35) +
+          clamp(((humidity - 60) / 35) * 30, 0, 30) +
+          clamp(20 - (wind / 15) * 20, 0, 20) +
+          clamp(((100 - cloud) / 100) * 15, 0, 15)
+      );
+    const levelOf = (s: number) => (s >= 75 ? 0 : s >= 55 ? 1 : s >= 35 ? 2 : 3);
+    const ICONS: Record<number, string> = {
+      0: '☀️', 1: '🌤️', 2: '⛅', 3: '☁️', 45: '🌫️', 48: '🌫️',
+      51: '🌦️', 53: '🌦️', 55: '🌧️', 56: '🌧️', 57: '🌧️',
+      61: '🌧️', 63: '🌧️', 65: '🌧️', 66: '🌧️', 67: '🌧️',
+      71: '🌨️', 73: '🌨️', 75: '❄️', 77: '🌨️', 80: '🌦️', 81: '🌧️',
+      82: '⛈️', 85: '🌨️', 86: '🌨️', 95: '⛈️', 96: '⛈️', 99: '⛈️',
+    };
+    const RAIN = new Set([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82, 95, 96, 99]);
+    const FOG = new Set([45, 48]);
+
+    const url = new URL(cfg.endpoint);
+    url.searchParams.set('latitude', String(cfg.latitude));
+    url.searchParams.set('longitude', String(cfg.longitude));
+    url.searchParams.set(
+      'current',
+      'temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,weather_code,cloud_cover,pressure_msl,wind_speed_10m,wind_gusts_10m'
+    );
+    url.searchParams.set('hourly', 'visibility');
+    url.searchParams.set(
+      'daily',
+      'weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_probability_max,wind_speed_10m_max,uv_index_max'
+    );
+    url.searchParams.set('timezone', 'Asia/Bangkok');
+    url.searchParams.set('forecast_days', '7');
+    url.searchParams.set('wind_speed_unit', 'kmh');
+
+    const clock = (stamp: string) => (stamp && stamp.includes('T') ? stamp.slice(11, 16) : '--:--');
+    const weekday = (date: string) =>
+      new Date(`${date}T12:00:00`).toLocaleDateString(cfg.locale, { weekday: 'short' });
+
+    const run = async () => {
+      const current = section?.querySelector<HTMLElement>('[data-w="updated"]');
+      const stamp = current?.getAttribute('datetime') ?? '';
+      const ageMinutes = stamp ? (Date.now() - new Date(`${stamp}:00`).getTime()) / 60000 : Infinity;
+      if (ageMinutes < cfg.refreshAfterMinutes) return;
+
+      try {
+        const response = await fetch(url, { headers: { accept: 'application/json' } });
+        if (!response.ok) throw new Error('unavailable');
+        const payload = await response.json();
+        const c = payload.current ?? {};
+        const d = payload.daily ?? {};
+
+        const times: string[] = payload.hourly?.time ?? [];
+        const visibility: (number | null)[] = payload.hourly?.visibility ?? [];
+        let idx = times.indexOf(c.time);
+        if (idx < 0) idx = Math.max(0, times.length - 1);
+        const visKm = ((visibility[idx] ?? 10000) as number) / 1000;
+
+        const humidity = Number(c.relative_humidity_2m ?? 0);
+        const wind = Number(c.wind_speed_10m ?? 0);
+        const cloud = Number(c.cloud_cover ?? 0);
+        const temp = Number(c.temperature_2m ?? 0);
+        const code = Number(c.weather_code ?? 0);
+        const minTemp = Number(d.temperature_2m_min?.[0] ?? temp);
+
+        set('temp', `${round(temp)}°`);
+        set('cond', cfg.labels[String(code)] ?? '');
+        set('cond-icon', ICONS[code] ?? '🌥️');
+        set('feelsLike', `${round(Number(c.apparent_temperature ?? 0))}°`);
+        set('humidity', `${round(humidity)}%`);
+        set('windLabel', `${round(wind)} km/h`);
+        set('gust', `${round(Number(c.wind_gusts_10m ?? 0))} km/h`);
+        set('visibility', `${(Math.round(visKm * 10) / 10).toFixed(1)} km`);
+        set('cloudCover', `${round(cloud)}%`);
+        set('precipitation', `${(Math.round(Number(c.precipitation ?? 0) * 10) / 10).toFixed(1)} mm`);
+        set('pressure', `${round(Number(c.pressure_msl ?? 0))} hPa`);
+        set('sunrise', clock(String(d.sunrise?.[0] ?? '')));
+        set('sunset', clock(String(d.sunset?.[0] ?? '')));
+        set('uvIndex', `${round(Number(d.uv_index_max?.[0] ?? 0))}`);
+        set(
+          'dayTemps',
+          `${round(Number(d.temperature_2m_max?.[0] ?? temp))}° / ${round(minTemp)}°`
+        );
+        set('updated', clock(String(c.time ?? '')));
+        set('offline', '');
+        current?.setAttribute('datetime', String(c.time ?? ''));
+
+        const s = score(minTemp, humidity, wind, cloud);
+        const lvl = levelOf(s);
+        set('viewing-score', String(s));
+        set('viewing-level', cfg.levels[lvl] ?? '');
+        const bar = section?.querySelector<HTMLElement>('[data-w="viewing-bar"]');
+        if (bar) bar.style.width = `${s}%`;
+
+        const adviceKey =
+          RAIN.has(code) && Number(c.precipitation ?? 0) > 0
+            ? 'rain'
+            : FOG.has(code)
+              ? 'fog'
+              : temp >= 30
+                ? 'hot'
+                : (['excellent', 'good', 'fair', 'low'] as const)[lvl];
+        set('viewing-advice', cfg.advice[adviceKey] ?? '');
+
+        set('dress-temp', `${round(temp)}°`);
+        const dressKey = temp < 18 ? 'dressCold' : temp <= 26 ? 'dressMild' : 'dressWarm';
+        set('dress-note', cfg.advice[dressKey] ?? '');
+
+        const dayTimes: string[] = d.time ?? [];
+        dayTimes.slice(0, 7).forEach((date: string, i: number) => {
+          const card = section?.querySelector<HTMLElement>(`[data-day="${i}"]`);
+          if (!card) return;
+          const dayCode = Number(d.weather_code?.[i] ?? 0);
+          const dayScore = score(
+            Number(d.temperature_2m_min?.[i] ?? 0),
+            humidity,
+            Number(d.wind_speed_10m_max?.[i] ?? 0),
+            clamp(100 - Number(d.precipitation_probability_max?.[i] ?? 0), 0, 100)
+          );
+          const put = (name: string, value: string) => {
+            const el = card.querySelector<HTMLElement>(`[data-w="${name}"]`);
+            if (el) el.textContent = value;
+          };
+          put('d-icon', ICONS[dayCode] ?? '🌥️');
+          put('d-cond', cfg.labels[String(dayCode)] ?? '');
+          put('d-max', `${round(Number(d.temperature_2m_max?.[i] ?? 0))}°`);
+          put('d-min', `${round(Number(d.temperature_2m_min?.[i] ?? 0))}°`);
+          put('d-pop', `${round(Number(d.precipitation_probability_max?.[i] ?? 0))}%`);
+          put('d-score', String(dayScore));
+          put('d-level', cfg.levels[levelOf(dayScore)] ?? '');
+          const heading = card.querySelector<HTMLElement>('div');
+          if (heading && i > 1) heading.textContent = weekday(date);
+        });
+      } catch {
+        set('offline', cfg.offlineText);
+      }
+    };
+
+    if (document.readyState === 'complete') void run();
+    else window.addEventListener('load', () => void run(), { once: true });
+  }
+</script>

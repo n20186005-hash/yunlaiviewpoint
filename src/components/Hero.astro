@@ -1,5 +1,7 @@
 ---
+import { Picture } from 'astro:assets';
 import { siteConfig } from '../config';
+import { heroImage } from '../assets/gallery/images';
 import type { Lang } from '../i18n/ui';
 
 interface Props {
@@ -12,9 +14,14 @@ const hero = messages.hero;
 const main = hero.titleMain as string;
 const accent = hero.titleAccent as string;
 const parts = main.split(accent);
-const heroImg = '/gallery/yun-lai-viewpoint-15.jpg';
 const mapsUrl = siteConfig.mapsUrl;
 const coordsLabel = hero.coordsLabel;
+
+// ---- 单景点 SEO 实体绑定变量 ----
+const entity = siteConfig.entity;
+const fullName: string = entity.attractionFullName[lang];
+const city: string = entity.city[lang];
+const country: string = entity.country[lang];
 
 // Full weather-code labels (all languages); only the current language is shipped per page.
 const WEATHER_CODES: Record<number, Record<string, { t: string; s: string }>> = {
@@ -46,7 +53,20 @@ const weatherMap = Object.fromEntries(
 ---
 
 <section id="home" class="relative min-h-screen flex items-end overflow-hidden">
-  <img src={heroImg} alt={main} class="absolute inset-0 w-full h-full object-cover" />
+  <div class="absolute inset-0">
+    <Picture
+      src={heroImage}
+      formats={['avif', 'webp']}
+      widths={[768, 1280, 1920]}
+      sizes="100vw"
+      quality={72}
+      alt={`${fullName} - Main view in ${city}, ${country}`}
+      class="w-full h-full object-cover"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+    />
+  </div>
   <div class="absolute inset-0 bg-gradient-to-t from-teakDeep via-teakDeep/70 to-teak/40"></div>
   <div class="hero-glow absolute inset-0"></div>
 
@@ -55,6 +75,7 @@ const weatherMap = Object.fromEntries(
       <p class="font-hand text-gold text-xl md:text-2xl mb-3">{hero.eyebrow}</p>
       <h1 class="font-display font-semibold leading-[1.05] text-5xl md:text-7xl lg:text-8xl text-ivory">
         {parts[0]}<span class="gold-text-bright">{accent}</span>{parts[1] ?? ''}
+        <span class="sr-only"> — {fullName} ({city})</span>
       </h1>
       <p class="mt-6 max-w-xl text-ivory/85 text-lg md:text-xl">{hero.subtitle}</p>
 
@@ -67,14 +88,33 @@ const weatherMap = Object.fromEntries(
         </a>
       </div>
 
+      <!-- 首屏关键信息：门票 / 最佳时段 / 开放时间 / 山路提示 -->
+      {hero.facts && (
+        <dl class="mt-7 grid sm:grid-cols-2 gap-x-6 gap-y-2 max-w-2xl">
+          {hero.facts.map((f) => (
+            <div class="flex items-start gap-2.5 text-sm">
+              <span class="text-base leading-6" aria-hidden="true">{f.icon}</span>
+              <span class="text-ivory/60 whitespace-nowrap">{f.label}</span>
+              <span class="text-ivory/90">{f.value}</span>
+            </div>
+          ))}
+        </dl>
+      )}
+
       <div class="mt-8 flex flex-wrap items-center gap-5 text-sm text-ivory/80">
         <span class="stars text-lg">★ {hero.rating}</span>
-        <span>{hero.reviewCount} Google</span>
+        <span>({hero.reviewCount}) Google</span>
         <span class="hidden sm:inline text-ivory/40">·</span>
         <span>{coordsLabel}</span>
       </div>
 
-      <a href={mapsUrl} target="_blank" rel="noopener" class="mt-5 inline-flex items-center gap-2 text-goldBright hover:text-gold underline-offset-4 hover:underline text-sm">
+      <!-- 评分与评价数来源小字（同步自谷歌地图用户评价） -->
+      <p class="mt-2 max-w-xl text-[11px] text-ivory/60 leading-relaxed">
+        {hero.ratingSyncNote}
+        <a href={mapsUrl} target="_blank" rel="noopener noreferrer" class="text-goldBright underline-offset-2 hover:underline">{hero.ratingSyncLink}</a>
+      </p>
+
+      <a href={mapsUrl} target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center gap-2 text-goldBright hover:text-gold underline-offset-4 hover:underline text-sm">
         {hero.viewLocation}
       </a>
 

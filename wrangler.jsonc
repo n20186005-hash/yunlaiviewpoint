@@ -1,0 +1,29 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "yunlaiviewpoint",
+  "compatibility_date": "2025-09-01",
+
+  // 保留 *.workers.dev 预览地址，便于未绑定域名前直接验证
+  "workers_dev": true,
+
+  // 站点为 Astro 静态构建产物（output: 'static'），
+  // 直接作为 Workers Static Assets 上传，无需额外的 Worker 脚本。
+  "assets": {
+    "directory": "./dist",
+    // 命中不到文件时返回 dist/404.html，并带上真实的 404 状态码
+    "not_found_handling": "404-page",
+    // /th 会自动落到 /th/index.html；/th/ 也直接可取到
+    "html_handling": "auto-trailing-slash"
+  }
+
+  // ── 绑定自定义域名的步骤（需域名所有者操作）─────────────────────────────
+  // yunlaiviewpoint.com 与 www.yunlaiviewpoint.com 目前在 Cloudflare DNS 中
+  // 已存在外部托管的 A / CNAME 记录，wrangler 无法覆盖。确认要切换解析后：
+  //   1. 在 Cloudflare 后台 → 该域名 → DNS 删除这两条既有记录；
+  //   2. 取消下面 routes 的注释，再执行 npm run deploy。
+  //
+  // "routes": [
+  //   { "pattern": "yunlaiviewpoint.com", "custom_domain": true },
+  //   { "pattern": "www.yunlaiviewpoint.com", "custom_domain": true }
+  // ]
+}

@@ -1,0 +1,90 @@
+---
+interface Props {
+  messages: Record<string, any>;
+}
+const { messages } = Astro.props;
+const s = messages.services;
+
+const whereClass: Record<string, string> = {
+  inside: 'where-inside',
+  nearby: 'where-nearby',
+  town: 'where-town',
+};
+const whereLabel = (key: string) => s.locationLabels?.[key] ?? key;
+---
+<!--
+  访客服务与周边设施
+  仅按「设施类型」概述位置与可预期情况，不推荐、不排名、不列举任何具体商户，
+  以保持非盈利科普站的中立性。
+-->
+<section id="services" class="py-20 bg-sand text-ink">
+  <div class="max-w-7xl mx-auto px-5">
+    <p class="font-hand text-gold text-xl md:text-2xl">{s.label}</p>
+    <h2 class="font-display font-semibold text-3xl md:text-5xl text-teak mt-2">{s.heading}</h2>
+    <p class="mt-4 max-w-3xl text-ink/80">{s.intro}</p>
+
+    <p class="mt-5 inline-flex items-start gap-2 max-w-3xl rounded-xl border border-gold/45 bg-white/60 px-4 py-3 text-sm text-ink/75">
+      <span aria-hidden="true">ⓘ</span>
+      <span>{s.neutralityNote}</span>
+    </p>
+
+    <!-- 设施清单 -->
+    <div class="mt-10 rounded-3xl border border-gold/40 bg-white/75 overflow-hidden">
+      <div class="hidden md:grid grid-cols-[minmax(0,1.5fr)_minmax(0,0.7fr)_minmax(0,2.2fr)_minmax(0,2fr)] gap-4 px-6 py-4 bg-teak/5 text-xs font-semibold uppercase tracking-wide text-ink/60">
+        <div>{s.columns.type}</div>
+        <div>{s.columns.where}</div>
+        <div>{s.columns.what}</div>
+        <div>{s.columns.tip}</div>
+      </div>
+
+      <div>
+        {s.items.map((item) => (
+          <div class="service-row px-6 py-5 grid gap-3 md:gap-4 md:grid-cols-[minmax(0,1.5fr)_minmax(0,0.7fr)_minmax(0,2.2fr)_minmax(0,2fr)]">
+            <div class="flex items-center gap-3">
+              <span class="text-2xl leading-none" aria-hidden="true">{item.icon}</span>
+              <span class="font-semibold text-teak">{item.type}</span>
+            </div>
+
+            <div class="flex md:block items-center">
+              <span class={`where-pill ${whereClass[item.where] ?? ''}`}>{whereLabel(item.where)}</span>
+            </div>
+
+            <div>
+              <p class="md:hidden text-[11px] font-semibold uppercase tracking-wide text-ink/45">
+                {s.columns.what}
+              </p>
+              <p class="text-sm text-ink/80">{item.what}</p>
+            </div>
+
+            <div>
+              <p class="md:hidden text-[11px] font-semibold uppercase tracking-wide text-ink/45">
+                {s.columns.tip}
+              </p>
+              <p class="text-sm text-ink/70">{item.tip}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- 上山之前 -->
+    <div class="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-8 mt-12">
+      <div>
+        <h3 class="font-display text-xl text-teak">{s.emergencyTitle}</h3>
+        <ul class="mt-4 space-y-3">
+          {s.emergency.map((e) => (
+            <li class="flex items-start gap-3 rounded-xl border border-gold/35 bg-white/60 px-4 py-3">
+              <span class="text-xl leading-none" aria-hidden="true">{e.icon}</span>
+              <span class="text-sm text-ink/80">{e.text}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="rounded-3xl bg-teak text-ivory p-6 md:p-8 flex flex-col justify-center">
+        <h3 class="font-display text-2xl text-goldBright">{s.supportTitle}</h3>
+        <p class="mt-3 text-ivory/85 leading-relaxed">{s.supportText}</p>
+      </div>
+    </div>
+  </div>
+</section>

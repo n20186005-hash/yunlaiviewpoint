@@ -1,0 +1,304 @@
+{
+  "header": {
+    "weather": "Weather",
+    "seasons": "Seasons",
+    "routes": "Routes",
+    "services": "Services",
+    "responsibility": "Stewardship"
+  },
+  "weather": {
+    "label": "Ridge weather",
+    "heading": "Live Conditions & 7-Day Outlook",
+    "intro": "The quality of the cloud sea is decided overnight by temperature, humidity and wind. Readings below are taken at the ridge coordinates and refresh on every visit.",
+    "nowTitle": "On the ridge right now",
+    "feelsLike": "Feels like",
+    "humidity": "Humidity",
+    "windLabel": "Wind",
+    "gust": "Gusts",
+    "precipitation": "Precipitation",
+    "visibility": "Visibility",
+    "cloudCover": "Cloud cover",
+    "pressure": "Pressure",
+    "uvIndex": "UV index",
+    "updatedAt": "Updated",
+    "wmo": {
+      "0": "Clear sky",
+      "1": "Mainly clear",
+      "2": "Partly cloudy",
+      "3": "Overcast",
+      "45": "Fog",
+      "48": "Freezing fog",
+      "51": "Light drizzle",
+      "53": "Drizzle",
+      "55": "Heavy drizzle",
+      "56": "Freezing drizzle",
+      "57": "Heavy freezing drizzle",
+      "61": "Light rain",
+      "63": "Rain",
+      "65": "Heavy rain",
+      "66": "Freezing rain",
+      "67": "Heavy freezing rain",
+      "71": "Light snow",
+      "73": "Snow",
+      "75": "Heavy snow",
+      "77": "Snow grains",
+      "80": "Light showers",
+      "81": "Rain showers",
+      "82": "Violent showers",
+      "85": "Snow showers",
+      "86": "Heavy snow showers",
+      "95": "Thunderstorm",
+      "96": "Thunderstorm with hail",
+      "99": "Severe thunderstorm with hail"
+    },
+    "forecastTitle": "Next 7 days on the ridge",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "precipChance": "Rain chance",
+    "sunrise": "Sunrise",
+    "sunset": "Sunset",
+    "dayTemps": "High / Low",
+    "viewingTitle": "Cloud-sea viewing index",
+    "viewingLevels": ["Excellent", "Good", "Fair", "Low"],
+    "viewingFormula": "Weighted from overnight temperature, humidity, wind speed and sky cover.",
+    "advice": {
+      "excellent": "Dense cloud is likely to settle in the valley — arrive by 05:45 to claim a spot on the main deck.",
+      "good": "Cloud should form in broad patches; the eastern valley fills first.",
+      "fair": "Broken cloud with open gaps; expect strong side light once the sun clears the ridge.",
+      "low": "Warm, breezy or heavily overcast — a settled sea of cloud is unlikely this morning.",
+      "rain": "Rain is likely on the ridge. Timber decks stay usable, but the trails turn slippery.",
+      "fog": "The viewpoint may sit inside the cloud itself. Visibility on the access road drops sharply.",
+      "hot": "Midday heat builds quickly. Shift your visit to first light or the late afternoon."
+    },
+    "dressTitle": "What to wear",
+    "dressNow": "Ridge temperature now",
+    "dressCold": "Add a windproof layer — the ridge runs several degrees cooler than Pai town.",
+    "dressMild": "A light jacket is enough, though mornings still feel cool in the wind.",
+    "dressWarm": "Warm and still — sun protection and drinking water matter more than extra layers.",
+    "sourceNote": "Meteorological readings refresh automatically every hour.",
+    "syncNote": "Live values replace the last synced reading as soon as your connection is available.",
+    "refreshing": "Updating…",
+    "offline": "Showing the most recent synced reading.",
+    "expandNote": "Swipe the daily strip to see the full week."
+  },
+  "seasons": {
+    "label": "Seasonal planning",
+    "heading": "Season-by-Season Visit Strategy",
+    "intro": "A ridge at roughly 1,200 m behaves differently in every season. The table below combines long-term climate averages with field observations from local guides, so you can match your month to the experience you actually want.",
+    "basisTitle": "How this table was built",
+    "basis": [
+      { "title": "Long-term climate averages", "text": "Thirty-year monthly normals for the Pai basin, covering rainfall days together with mean daytime highs and night-time lows." },
+      { "title": "Cloud-sea frequency", "text": "Share of mornings per month in which a continuous cloud layer was observed filling the eastern valley before 08:00." },
+      { "title": "Ecological field notes", "text": "Bird and butterfly activity, flowering cycles and the regional burning period, recorded by local guides and long-standing visitors." }
+    ],
+    "tableTitle": "Seasonal strategy at a glance",
+    "columns": ["Season", "Months", "Avg high / low", "Cloud-sea mornings", "Rain days", "Wildlife & phenology", "Verdict"],
+    "rows": [
+      { "season": "Cool-season peak", "months": "Dec – Jan", "temp": "28° / 12°", "cloud": "Very high · ~70%", "rain": "1–2 days", "eco": "Dry-season migrants arrive; ridge grasses go to seed", "verdict": "Best overall", "tier": "best" },
+      { "season": "Shoulder cool", "months": "Nov & Feb", "temp": "29° / 14°", "cloud": "High · ~55%", "rain": "2–4 days", "eco": "Wildflowers open; butterflies emerge on warm afternoons", "verdict": "Very good", "tier": "good" },
+      { "season": "Hot season", "months": "Mar – May", "temp": "34° / 18°", "cloud": "Moderate · ~30%", "rain": "4–8 days", "eco": "Peak dawn birdsong; agricultural haze builds in Mar–Apr", "verdict": "Widest horizons", "tier": "fair" },
+      { "season": "Rainy season", "months": "Jun – Oct", "temp": "31° / 21°", "cloud": "Erratic · ~35%", "rain": "15–22 days", "eco": "Forest at full leaf; frogs and insects peak at dusk", "verdict": "Dramatic, but wet", "tier": "mixed" }
+    ],
+    "metricsTitle": "What each column measures",
+    "metrics": [
+      { "term": "Avg high / low", "text": "Shade temperature measured on the ridge, several degrees below the town of Pai." },
+      { "term": "Cloud-sea mornings", "text": "Probability that a continuous cloud layer settles over the eastern valley before 08:00." },
+      { "term": "Rain days", "text": "Days per month with measurable rainfall — the decisive figure for road conditions and trail footing." },
+      { "term": "Wildlife & phenology", "text": "Seasonal behaviour of birds, butterflies and flowering plants around the ridge." }
+    ],
+    "adviceTitle": "Choosing your month",
+    "advice": [
+      { "title": "Chasing the cloud sea", "text": "Book December or January. Nights are coldest, humidity peaks before dawn and the valley fills most reliably." },
+      { "title": "Avoiding the crowds", "text": "February and November deliver dependable cloud with roughly half the visitors of the peak weeks." },
+      { "title": "Clear-sky photography", "text": "March and April bring the widest horizons, though agricultural haze can soften distant ridgelines." },
+      { "title": "Green-season atmosphere", "text": "June to October is lush and dramatic, but allow buffer time for wet, winding roads." }
+    ],
+    "tableHint": "Swipe the table sideways on a phone."
+  },
+  "routes": {
+    "label": "Routes & plans",
+    "heading": "Routes Shaped by How You Travel",
+    "intro": "Three tailored plans for different travellers, plus the two standard routes most visitors follow. All timings assume you set out from Pai town.",
+    "audienceTitle": "Plans by traveller type",
+    "paceLabel": "Pace",
+    "durationLabel": "Duration",
+    "bestTimeLabel": "Best window",
+    "highlightsLabel": "Highlights",
+    "tipsLabel": "Practical notes",
+    "audiences": [
+      {
+        "icon": "👨‍👩‍👧",
+        "name": "Families with children",
+        "pace": "Relaxed, frequent stops",
+        "duration": "2 – 3 hours on the ridge",
+        "bestTime": "06:00 – 09:00",
+        "summary": "Keeps walking distances short and warm-up breaks close at hand, so young children stay comfortable in the cold and the mist.",
+        "highlights": [
+          "Sunrise from the main timber deck, a two-minute walk from the parking area",
+          "Hot tea and simple sweet snacks at the sheltered tea corner",
+          "An open, level lawn where children can move around safely"
+        ],
+        "tips": [
+          "Dress children in a fleece plus a windproof shell — the ridge sits 4–6 °C below town",
+          "Pack a spare pair of socks; the morning grass is soaked with dew",
+          "Head down before 09:30 to avoid the winding descent in the heat"
+        ]
+      },
+      {
+        "icon": "📷",
+        "name": "Photographers & nature observers",
+        "pace": "Slow, light-driven",
+        "duration": "3 – 4 hours on the ridge",
+        "bestTime": "05:30 – 09:00, then 17:00 – 19:00",
+        "summary": "Built around the two windows when light does the most work: the blue hour before sunrise and the warm hour before dusk.",
+        "highlights": [
+          "Blue-hour frames from the bridge, with the valley still under a flat cloud deck",
+          "Side light striking the eastern ridge about twenty minutes after sunrise",
+          "Dusk birdsong and butterfly activity along the short ridge trail"
+        ],
+        "tips": [
+          "Reach the deck 45 minutes before sunrise to set up before the first light",
+          "Carry a microfibre cloth — mist condenses on front elements within minutes",
+          "Cold air drains batteries fast; bring a spare and keep it in an inside pocket"
+        ]
+      },
+      {
+        "icon": "♿",
+        "name": "Low-mobility & accessible visits",
+        "pace": "Gentle, seated breaks",
+        "duration": "1 – 2 hours on the ridge",
+        "bestTime": "07:00 – 10:00",
+        "summary": "Uses the paved approach and the timber deck, where the whole panorama is visible from a seated position without stairs.",
+        "highlights": [
+          "Panorama visible directly from the vehicle drop-off point",
+          "Level timber deck with continuous bench seating along the rail",
+          "Sheltered tea corner where the view continues from the table"
+        ],
+        "tips": [
+          "The last stretch is steep and unpaved in places — a high-clearance vehicle helps",
+          "Morning timber can be slick; non-slip soles are strongly advised",
+          "Ask a companion to order at the tea corner, as the counter has a short step"
+        ]
+      }
+    ],
+    "itineraryTitle": "Standard visitor routes",
+    "halfDay": {
+      "name": "Half-day sunrise route",
+      "duration": "4 – 5 hours",
+      "suitable": "First-time visitors, short stays, anyone on a tight schedule",
+      "steps": [
+        { "time": "04:45", "title": "Depart Pai town", "text": "Leave while the streets are still empty; the climb takes 25–35 minutes in the dark." },
+        { "time": "05:30", "title": "Arrive and settle", "text": "Park, collect a hot drink and take a bench on the main deck before the light changes." },
+        { "time": "06:00", "title": "Blue hour", "text": "The valley sits under a flat cloud deck. This is the quietest, most photogenic phase." },
+        { "time": "06:40", "title": "Sunrise and the sea of cloud", "text": "The cloud layer lights from the top down and begins to break apart over the ridges." },
+        { "time": "07:30", "title": "Tea and the short ridge trail", "text": "Warm up at the tea corner, then walk the fifteen-minute ridge loop." },
+        { "time": "09:00", "title": "Return to Pai", "text": "Descend before the heat builds, with the option to stop at the memorial bridge on the way." }
+      ]
+    },
+    "fullDay": {
+      "name": "Full-day ridge and valley route",
+      "duration": "8 – 10 hours",
+      "suitable": "Travellers with their own transport who want the ridge and the valley in one day",
+      "steps": [
+        { "time": "04:45", "title": "Depart Pai town", "text": "Head north on the ridge road well before first light." },
+        { "time": "05:30", "title": "Sunrise on the ridge", "text": "Blue hour, sunrise and the cloud sea from the main deck." },
+        { "time": "07:30", "title": "Tea corner breakfast", "text": "Hot tea and light snacks while the mist lifts off the valley floor." },
+        { "time": "08:30", "title": "Short ridge trail and gardens", "text": "Walk the ridge loop, then explore the terraced tea plots and flower beds." },
+        { "time": "10:30", "title": "Descend to the valley", "text": "Follow the loop road down toward the river crossing and the historic bridge." },
+        { "time": "12:00", "title": "Lunch near the hot springs", "text": "Local food stalls and small restaurants cluster around the hot spring area." },
+        { "time": "14:00", "title": "Valley afternoon", "text": "Soak in the hot springs or continue along the loop road at an easy pace." },
+        { "time": "17:30", "title": "Second golden hour", "text": "Choose a west-facing viewpoint for the warm hour before dusk." },
+        { "time": "19:00", "title": "Return to Pai", "text": "Back in town for dinner; the ridge road is unlit, so avoid descending late." }
+      ]
+    },
+    "packingTitle": "What to carry",
+    "packing": [
+      { "icon": "🧥", "name": "Windproof outer layer", "note": "Ridge mornings sit 4–6 °C below town" },
+      { "icon": "🔦", "name": "Head torch", "note": "Parking and trails are unlit before dawn" },
+      { "icon": "💧", "name": "Water", "note": "Drinking water is limited above the tea corner" },
+      { "icon": "💵", "name": "Cash in small notes", "note": "Card readers are unreliable on the ridge" },
+      { "icon": "🧴", "name": "Sun protection", "note": "UV climbs quickly once the cloud burns off" },
+      { "icon": "📱", "name": "Offline maps", "note": "Signal is patchy on the upper switchbacks" }
+    ]
+  },
+  "services": {
+    "label": "Visitor services",
+    "heading": "Visitor Services & Nearby Facilities",
+    "intro": "Everything below is described by facility type and distance band only, so you can plan a comfortable visit without relying on any single business.",
+    "neutralityNote": "This is a non-commercial educational resource. We describe the types of facilities available and never recommend, rank or list individual businesses.",
+    "locationLabels": {
+      "inside": "At the viewpoint",
+      "nearby": "On the ridge road",
+      "town": "In Pai town"
+    },
+    "columns": {
+      "type": "Facility type",
+      "where": "Where to find it",
+      "what": "What to expect",
+      "tip": "Practical tip"
+    },
+    "items": [
+      { "icon": "🚻", "type": "Public toilets", "where": "inside", "what": "Simple washrooms at the main viewpoint area, maintained by the local community; a small contribution box is usually provided.", "tip": "Facilities are basic and busiest between 06:00 and 07:30 — go before sunrise if you can." },
+      { "icon": "🅿️", "type": "Parking", "where": "inside", "what": "A compact unpaved lot beside the viewpoint, with room for roughly a dozen vehicles and scooters.", "tip": "Arrive before 05:45 on cool-season mornings; the lot fills within minutes and turning space is tight." },
+      { "icon": "☕", "type": "Food & drink", "where": "inside", "what": "A sheltered tea corner serving hot drinks and light snacks, plus a handful of small food stalls on busy mornings.", "tip": "Hot tea is the local ritual here. Menus are simple; expect mostly drinks, toast and sweet snacks." },
+      { "icon": "🍽️", "type": "Full meals", "where": "town", "what": "Northern Thai kitchens, noodle shops and bakeries concentrate in Pai town, 15–20 minutes downhill.", "tip": "Eat after your visit rather than before — most town kitchens open around 08:00." },
+      { "icon": "🛏️", "type": "Accommodation", "where": "nearby", "what": "Options range from simple hillside bungalows and tent pitches near the ridge to guesthouses and hostels in town.", "tip": "Staying on the ridge removes the pre-dawn drive but puts you further from restaurants and shops." },
+      { "icon": "🏕️", "type": "Camping", "where": "inside", "what": "A small camping lawn beside the viewpoint, used mostly in the cool season.", "tip": "Nights drop close to 10 °C in December and January. Confirm availability ahead and bring a proper sleeping bag." },
+      { "icon": "🛒", "type": "Shops & convenience stores", "where": "town", "what": "Small groceries, convenience stores and a market in Pai town; the ridge itself has no general shop.", "tip": "Buy water, snacks and batteries in town before driving up — assume nothing is available on the ridge." },
+      { "icon": "⛽", "type": "Fuel & EV charging", "where": "town", "what": "Petrol stations sit on the main roads into Pai town; charging points are limited and mostly associated with accommodation.", "tip": "Refuel before the climb. Uphill switchbacks use noticeably more fuel than the distance suggests." },
+      { "icon": "🏥", "type": "Medical help", "where": "town", "what": "A community hospital, clinics and pharmacies operate in Pai town, with larger hospitals in Mae Hong Son.", "tip": "There is no medical facility on the ridge. Carry a basic first-aid kit and any personal medication." },
+      { "icon": "📶", "type": "Mobile signal & Wi-Fi", "where": "nearby", "what": "Mobile coverage is usable around the viewpoint but drops out on parts of the upper access road.", "tip": "Download an offline map before leaving town and screenshot your booking details." },
+      { "icon": "🏧", "type": "Cash & payments", "where": "town", "what": "ATMs are available in Pai town; the ridge operates largely on cash.", "tip": "Withdraw in town and keep small notes — change is often scarce at the viewpoint." },
+      { "icon": "♿", "type": "Accessible facilities", "where": "inside", "what": "The main deck is level and reachable from the drop-off point, but there is no dedicated accessible washroom.", "tip": "Travel with a companion if a washroom visit is likely to be needed, and plan it in town instead." }
+    ],
+    "emergencyTitle": "Before you drive up",
+    "emergency": [
+      { "icon": "🧭", "text": "Save the viewpoint coordinates offline — the final junctions are poorly signposted in the dark." },
+      { "icon": "🛞", "text": "Check brakes, tyres and lights. The descent is long, steep and unlit." },
+      { "icon": "🐕", "text": "Free-roaming dogs are common along the ridge road. Slow down and give them room." }
+    ],
+    "supportTitle": "Travelling responsibly",
+    "supportText": "Services on the ridge are small, family-run and seasonal. Buying a drink, refilling a bottle or leaving a modest toilet contribution directly supports the community that maintains the viewpoint."
+  },
+  "responsibility": {
+    "label": "Science & stewardship",
+    "heading": "Understanding the Ridge, and Looking After It",
+    "intro": "A short explanation of why this landscape behaves the way it does, followed by what we ask of every visitor.",
+    "scienceTitle": "The science behind the cloud sea",
+    "scienceLead": "The cloud sea is a temperature inversion, not fog that simply happens to be there. Understanding the mechanism explains why mornings differ so much from one day to the next.",
+    "science": [
+      { "title": "Night-time cooling", "text": "Clear nights let the valley floor radiate heat away. Dense air cools faster than the air on the slopes and settles into the basin." },
+      { "title": "The inversion layer", "text": "Warm air above traps the cold air below. The boundary between them is where the cloud top forms, and the ridge sits just above it." },
+      { "title": "Humidity and condensation", "text": "Moist air from the valley condenses as it cools to its dew point, turning into a flat, continuous cloud deck." },
+      { "title": "Why wind breaks it", "text": "Even a moderate breeze mixes the layers and the cloud sea disperses. Still, cold, damp mornings are the ones that deliver." }
+    ],
+    "ecosystemTitle": "Why this ridge matters",
+    "ecosystem": [
+      { "title": "An island in the mist", "text": "The upper ridge holds montane forest and cloud-fed plant communities that cannot survive on the warmer valley floor." },
+      { "title": "A stopover on a flyway", "text": "Migrant birds use the ridge as a resting point, especially during the dry season when the valley lowlands are heavily worked." },
+      { "title": "Water source for the basin", "text": "Cloud interception on these slopes feeds the streams the valley depends on. Damaged ground cover reduces that capture." },
+      { "title": "A living cultural landscape", "text": "Terraced tea plots and flower gardens reflect generations of upland farming by the local Yunnanese community." }
+    ],
+    "dutyTitle": "What we ask of every visitor",
+    "duties": [
+      { "icon": "🥾", "title": "Stay on established paths", "text": "Off-trail walking compacts thin mountain soils and destroys growth that takes decades to return." },
+      { "icon": "🗑️", "title": "Carry everything back down", "text": "There is no collection service on the ridge. Take your waste, including fruit peel and cigarette ends." },
+      { "icon": "🔇", "title": "Keep the sunrise quiet", "text": "The early hours are the resident birds' busiest period. Loud music and drones disturb both wildlife and other visitors." },
+      { "icon": "🐾", "title": "Do not feed animals", "text": "Feeding changes foraging behaviour and draws wildlife toward the road, where they are at risk." },
+      { "icon": "🛍️", "title": "Buy local, buy small", "text": "Purchases from the community tea corner and small stalls keep the viewpoint maintained and free of larger development." },
+      { "icon": "📣", "title": "Report what you see", "text": "Tell us about damage, litter hotspots or unsafe conditions; corrections and observations shape this guide." }
+    ],
+    "cultureTitle": "Respecting the local community",
+    "cultureText": "The viewpoint sits within the traditional lands of the valley's Yunnanese Thai community. Their tea-growing heritage and the small shrine on the ridge are living culture, not scenery. Ask before photographing people, keep voices low near the shrine, and accept that some areas may be closed for community reasons.",
+    "safetyTitle": "Safety notes for the ridge",
+    "safety": [
+      "Do not walk to the edge beyond the railings; the mist hides an unstable drop.",
+      "Cold, damp mornings make timber and stone slippery — take the steps slowly.",
+      "Drive the descent in a low gear and use engine braking rather than riding the brakes.",
+      "Sudden mist can reduce road visibility to a few metres; switch on your lights and slow down.",
+      "Tell someone in town where you are going if you plan to be on the ridge before first light."
+    ],
+    "closingTitle": "Why this guide exists",
+    "closingText": "This is an independent, non-commercial educational page maintained by people who visit the ridge often. There is no advertising, no booking commission and no affiliation with any operator. If something here is out of date or wrong, please tell us — accuracy is the only thing keeping it useful."
+  }
+}

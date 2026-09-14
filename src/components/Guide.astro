@@ -1,15 +1,9 @@
 ---
-import { siteConfig } from '../config';
-
 interface Props {
   messages: Record<string, any>;
 }
 const { messages } = Astro.props;
 const guide = messages.guide;
-const guideImgs = [
-  `/gallery/${siteConfig.galleryPrefix}2.jpg`,
-  `/gallery/${siteConfig.galleryPrefix}3.jpg`,
-];
 ---
 
 <section id="guide" class="py-20 bg-ivory text-ink">

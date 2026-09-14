@@ -1,6 +1,9 @@
 import th from './th.json';
 import en from './en.json';
 import zh from './zh.json';
+import thSections from './sections/th.json';
+import enSections from './sections/en.json';
+import zhSections from './sections/zh.json';
 
 export const defaultLang = 'th';
 export const languagesList = ['th', 'en', 'zh'] as const;
@@ -12,7 +15,35 @@ export const languages: Record<Lang, string> = {
   zh: '中文',
 };
 
-const messagesMap: Record<Lang, any> = { th, en, zh };
+/**
+ * Recursive merge so that the per-module section files (weather, seasons,
+ * routes, services, responsibility) can extend existing namespaces such as
+ * `header` without overwriting anything already defined in the core files.
+ */
+const mergeMessages = (base: any, extra: any): any => {
+  const out: Record<string, any> = { ...base };
+  for (const [key, value] of Object.entries(extra ?? {})) {
+    const current = out[key];
+    const bothPlainObjects =
+      value &&
+      typeof value === 'object' &&
+      !Array.isArray(value) &&
+      current &&
+      typeof current === 'object' &&
+      !Array.isArray(current);
+    out[key] = bothPlainObjects ? mergeMessages(current, value) : value;
+  }
+  return out;
+};
+
+const messagesMap: Record<Lang, any> = {
+  th: mergeMessages(th, thSections),
+  en: mergeMessages(en, enSections),
+  zh: mergeMessages(zh, zhSections),
+};
+
+/** Full merged message tree for a single language. */
+export const getMessages = (lang: Lang): any => messagesMap[lang];
 
 // mapping for <html lang> / hreflang
 export const htmlLang: Record<Lang, string> = {

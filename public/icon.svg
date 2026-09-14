@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Yun Lai Viewpoint">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0d2a2e"/>
+      <stop offset="1" stop-color="#071a1c"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f3dca0"/>
+      <stop offset="0.55" stop-color="#e6c675"/>
+      <stop offset="1" stop-color="#c9a962"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#sky)"/>
+  <circle cx="256" cy="196" r="74" fill="url(#gold)"/>
+  <g fill="none" stroke="#c9a962" stroke-width="10" stroke-linecap="round" opacity="0.55">
+    <path d="M256 74v-26"/>
+    <path d="M256 344v-26"/>
+    <path d="M134 196H108"/>
+    <path d="M404 196h-26"/>
+  </g>
+  <path d="M0 372 L118 268 L196 336 L286 250 L386 340 L512 262 L512 512 L0 512 Z" fill="#0d2a2e" opacity="0.95"/>
+  <path d="M0 404 L96 330 L182 396 L286 312 L402 400 L512 336 L512 512 L0 512 Z" fill="#123a3f"/>
+  <g fill="#f5ecd7" opacity="0.92">
+    <ellipse cx="176" cy="252" rx="66" ry="34"/>
+    <ellipse cx="232" cy="236" rx="52" ry="30"/>
+    <ellipse cx="348" cy="268" rx="74" ry="36"/>
+    <ellipse cx="288" cy="256" rx="56" ry="28"/>
+  </g>
+  <g fill="#e6c675" opacity="0.85">
+    <path d="M150 420 L214 366 L278 420 Z"/>
+    <path d="M250 440 L322 380 L394 440 Z"/>
+  </g>
+</svg>

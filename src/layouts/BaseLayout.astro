@@ -12,31 +12,66 @@ interface Props {
 const { lang, title, description, messages } = Astro.props;
 const canonical = `${siteConfig.domain}/${lang}/`;
 
+// ---- 单景点 SEO 实体绑定变量（对应配置变量表） ----
+const entity = siteConfig.entity;
+const fullName: string = entity.attractionFullName[lang];
+const shortName: string = entity.attractionShortName[lang];
+const city: string = entity.city[lang];
+const province: string = entity.stateProvince[lang];
+const country: string = entity.country[lang];
+const nearby1: string = entity.nearbyLandmark1[lang];
+const nearby2: string = entity.nearbyLandmark2[lang];
+
+const ogImage = `${siteConfig.domain}${siteConfig.ogImage}`;
+const ogImageAlt = `${fullName} in ${city}, ${country}`;
+
+// 注意：评价/评分仅用于页面展示与来源标注，**不**写入 JSON-LD。
+// 原因：这些评分来自 Google Maps 第三方，而 Google 的评论摘要政策要求
+// aggregateRating 必须来自本站自身收集的用户评价，引用第三方评分可能触发人工处置。
 const faqs = (messages && messages.guide && messages.guide.faqs) ? messages.guide.faqs : [];
+
+// 名称变体：多语言写法 + 搜索中实际出现的拼写变体，用于实体消歧
+const alternateNames: string[] = Array.from(
+  new Set([
+    shortName, // 当前语言下的简称
+    entity.attractionShortName.en, // Yun Lai
+    entity.attractionShortName.zh, // 云来
+    siteConfig.name.zh, // 云来观景台
+    entity.attractionFullName.th, // จุดชมวิว ทะเลหมอก หยุนไหล
+    siteConfig.nameLocal, // จุดชมวิวทะเลหมอกหยุนไหล
+    'Yun Lai View Point', // 实际检索拼写变体
+    'Yunlai Viewpoint', // 实际检索拼写变体
+    `${entity.city.en} ${entity.attractionFullName.en}`, // Pai Yun Lai Viewpoint
+  ])
+).filter((n) => n && n !== fullName);
 
 const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'TouristAttraction',
-    name: siteConfig.name[lang],
+    '@id': `${siteConfig.domain}/#attraction`,
+    name: fullName,
+    alternateName: alternateNames,
     description,
-    image: `${siteConfig.domain}/gallery/yun-lai-viewpoint-1.jpg`,
     url: canonical,
+    image: [ogImage],
+    // 每位访客 20 泰铢社区维护费（含一壶热茶），因此并非免费进入
+    isAccessibleForFree: false,
+    telephone: siteConfig.phone,
     address: {
       '@type': 'PostalAddress',
-      streetAddress: siteConfig.address,
-      addressCountry: 'TH',
+      streetAddress: entity.streetAddress,
+      addressLocality: city,
+      addressRegion: province,
+      postalCode: entity.postalCode,
+      addressCountry: entity.countryCode2Letter,
     },
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: siteConfig.coords.lat,
-      longitude: siteConfig.coords.lng,
+      latitude: entity.latitude,
+      longitude: entity.longitude,
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: siteConfig.rating,
-      reviewCount: siteConfig.reviewCount.replace(/,/g, ''),
-    },
+    hasMap: entity.mapsShareUrl,
     openingHoursSpecification: [
       {
         '@type': 'OpeningHoursSpecification',
@@ -46,6 +81,17 @@ const jsonLd = [
       },
     ],
     sameAs: siteConfig.sameAs,
+  },
+  {
+    // 地理面包屑与归属层级：全称 → 城市 → 省 → 国家
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: fullName, item: canonical },
+      { '@type': 'ListItem', position: 2, name: city },
+      { '@type': 'ListItem', position: 3, name: province },
+      { '@type': 'ListItem', position: 4, name: country },
+    ],
   },
   {
     '@context': 'https://schema.org',
@@ -63,9 +109,9 @@ const jsonLd = [
 <html lang={htmlLang[lang]}>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-    <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) — GA4 -->
     <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-HXM22WWPKP"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
@@ -73,21 +119,53 @@ const jsonLd = [
       gtag('js', new Date());
       gtag('config', 'G-HXM22WWPKP');
     </script>
-    <link rel="icon" type="image/jpeg" href={`/gallery/yun-lai-viewpoint-1.jpg`} />
+
+    <!-- TDK -->
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <meta name="author" content={fullName} />
+    <meta name="geo.region" content={entity.countryCode2Letter} />
+    <meta name="geo.placename" content={`${city}, ${province}`} />
+    <meta name="geo.position" content={`${entity.latitude};${entity.longitude}`} />
+    <meta name="ICBM" content={`${entity.latitude}, ${entity.longitude}`} />
+
+    <!-- Open Graph 社交标签 -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={fullName} />
     <meta property="og:locale" content={htmlLang[lang]} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={`${siteConfig.domain}/gallery/yun-lai-viewpoint-1.jpg`} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content={ogImageAlt} />
     <meta property="og:url" content={canonical} />
+
+    <!-- Twitter 卡片 -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
+
     {languagesList.map((l) => (
       <link rel="alternate" hreflang={htmlLang[l]} href={`${siteConfig.domain}/${l}/`} />
     ))}
-    <link rel="alternate" hreflang="x-default" href={`${siteConfig.domain}/th/`} />
+    <!--
+      x-default 面向「语言未命中 hreflang」的访客（如德、法、西语用户）。
+      英文是覆盖面最广的通用版本，因此指向 /en/；
+      站点自身的默认落地页仍由 public/_redirects 把 / 指向 /th/，两者互不冲突。
+    -->
+    <link rel="alternate" hreflang="x-default" href={`${siteConfig.domain}/en/`} />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#0d2a2e" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Yun Lai" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="icon" type="image/jpeg" href={siteConfig.ogImage} />
+    <link rel="apple-touch-icon" href={siteConfig.ogImage} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -99,5 +177,14 @@ const jsonLd = [
   </head>
   <body class="grain">
     <slot />
+
+    <!-- PWA service worker 注册 -->
+    <script is:inline>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('/sw.js').catch(function () {});
+        });
+      }
+    </script>
   </body>
 </html>

@@ -4,13 +4,18 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Hero from '../../components/Hero.astro';
 import About from '../../components/About.astro';
+import Weather from '../../components/Weather.astro';
+import Seasons from '../../components/Seasons.astro';
+import Routes from '../../components/Routes.astro';
+import Services from '../../components/Services.astro';
+import Responsibility from '../../components/Responsibility.astro';
 import Ecosystem from '../../components/Ecosystem.astro';
 import History from '../../components/History.astro';
-  import Guide from '../../components/Guide.astro';
-  import Sources from '../../components/Sources.astro';
-  import Food from '../../components/Food.astro';
+import Guide from '../../components/Guide.astro';
+import Food from '../../components/Food.astro';
 import Gallery from '../../components/Gallery.astro';
 import Reviews from '../../components/Reviews.astro';
+import Sources from '../../components/Sources.astro';
 import MapSection from '../../components/MapSection.astro';
 import Footer from '../../components/Footer.astro';
 import { getI18n } from '../../i18n/ui';
@@ -26,12 +31,28 @@ const { lang, messages } = await getI18n(Astro.url);
   <Header lang={lang} messages={messages} />
   <main>
     <Hero lang={lang} messages={messages} />
-    <About messages={messages} />
+    <About lang={lang} messages={messages} />
+
+    <!-- 实时天气与未来 7 日预报 -->
+    <Weather lang={lang} messages={messages} />
+
+    <!-- 按季节制定的游览策略 -->
+    <Seasons messages={messages} />
+
+    <!-- 按人群与出行节奏设计的路线 -->
+    <Routes messages={messages} />
+
+    <!-- 访客服务与周边设施（类型中立概述） -->
+    <Services messages={messages} />
+
+    <!-- 科普与访客责任 -->
+    <Responsibility messages={messages} />
+
     <Ecosystem messages={messages} />
     <History messages={messages} />
     <Guide messages={messages} />
     <Food messages={messages} />
-    <Gallery messages={messages} />
+    <Gallery lang={lang} messages={messages} />
     <Reviews messages={messages} />
     <Sources messages={messages} />
     <MapSection lang={lang} messages={messages} />

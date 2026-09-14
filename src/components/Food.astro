@@ -1,12 +1,13 @@
 ---
-import { siteConfig } from '../config';
+import { Picture } from 'astro:assets';
+import { getGalleryImage } from '../assets/gallery/images';
 
 interface Props {
   messages: Record<string, any>;
 }
 const { messages } = Astro.props;
 const food = messages.food;
-const foodImg = `/gallery/${siteConfig.galleryPrefix}5.jpg`;
+const foodImage = getGalleryImage(5);
 ---
 
 <section id="food" class="py-20 bg-teak text-ivory">
@@ -31,7 +32,17 @@ const foodImg = `/gallery/${siteConfig.galleryPrefix}5.jpg`;
         ))}
       </div>
       <div class="photo-frame rounded-2xl min-h-[280px]">
-        <img src={foodImg} alt={food.heading} class="w-full h-full object-cover" />
+        <Picture
+          src={foodImage}
+          formats={['avif', 'webp']}
+          widths={[560, 900]}
+          sizes="(min-width: 768px) 45vw, 100vw"
+          quality={70}
+          alt={food.heading}
+          loading="lazy"
+          decoding="async"
+          class="w-full h-full object-cover"
+        />
       </div>
     </div>
 

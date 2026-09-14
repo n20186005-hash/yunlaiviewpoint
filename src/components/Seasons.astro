@@ -1,0 +1,88 @@
+---
+interface Props {
+  messages: Record<string, any>;
+}
+const { messages } = Astro.props;
+const s = messages.seasons;
+---
+
+<section id="seasons" class="py-20 bg-ivory text-ink">
+  <div class="max-w-7xl mx-auto px-5">
+    <p class="font-hand text-gold text-xl md:text-2xl">{s.label}</p>
+    <h2 class="font-display font-semibold text-3xl md:text-5xl text-teak mt-2">{s.heading}</h2>
+    <p class="mt-4 max-w-3xl text-ink/80">{s.intro}</p>
+
+    <!-- 数据构成说明 -->
+    <div class="mt-10">
+      <h3 class="font-display text-xl text-teak">{s.basisTitle}</h3>
+      <div class="grid md:grid-cols-3 gap-4 mt-4">
+        {s.basis.map((b) => (
+          <div class="rounded-2xl border border-gold/40 bg-white/60 p-5">
+            <h4 class="font-semibold text-teak">{b.title}</h4>
+            <p class="mt-2 text-sm text-ink/75">{b.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- 季度游览策略表 -->
+    <h3 class="mt-12 font-display text-xl text-teak">{s.tableTitle}</h3>
+    <p class="mt-1 text-xs text-ink/50">{s.tableHint}</p>
+
+    <div class="strategy-scroll mt-4 rounded-2xl border border-gold/40 bg-white/70">
+      <table class="strategy-table">
+        <caption class="sr-only">{s.tableTitle}</caption>
+        <thead>
+          <tr>
+            {s.columns.map((c: string) => (
+              <th scope="col">{c}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {s.rows.map((row) => (
+            <tr>
+              <th scope="row" class="font-semibold text-teak whitespace-nowrap">{row.season}</th>
+              <td class="whitespace-nowrap text-ink/75">{row.months}</td>
+              <td class="whitespace-nowrap text-ink/75">{row.temp}</td>
+              <td class="whitespace-nowrap text-ink/75">{row.cloud}</td>
+              <td class="whitespace-nowrap text-ink/75">{row.rain}</td>
+              <td class="min-w-[220px] text-ink/75">{row.eco}</td>
+              <td>
+                <span class={`tier-badge tier-${row.tier}`}>{row.verdict}</span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 指标定义 -->
+    <div class="grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] gap-10 mt-12">
+      <div>
+        <h3 class="font-display text-xl text-teak">{s.metricsTitle}</h3>
+        <dl class="mt-4 space-y-4">
+          {s.metrics.map((m) => (
+            <div class="rounded-xl border-l-4 border-gold bg-white/60 px-4 py-3">
+              <dt class="font-semibold text-teak">{m.term}</dt>
+              <dd class="mt-1 text-sm text-ink/75">{m.text}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+
+      <div>
+        <h3 class="font-display text-xl text-teak">{s.adviceTitle}</h3>
+        <div class="mt-4 grid sm:grid-cols-2 gap-4">
+          {s.advice.map((a, i) => (
+            <div class="rounded-2xl bg-teak text-ivory p-5">
+              <span class="font-display text-goldBright text-sm">{String(i + 1).padStart(2, '0')}</span>
+              <h4 class="font-semibold text-goldBright mt-1">{a.title}</h4>
+              <p class="mt-2 text-sm text-ivory/85">{a.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
