@@ -12,13 +12,13 @@ export const siteConfig = {
   phone: '+66810243982',
   phoneDisplay: '+66 81 024 3982',
 
-  // 谷歌地图（Google Maps）最新评分——同步时间：2026 年 9 月
+  // 谷歌地图（Google Maps）最新评分——同步时间：2026 年 10 月
   rating: 4.4,
-  reviewCount: '5,033',
+  reviewCount: '5,063',
   reviewSyncDate: {
-    th: 'กันยายน 2026',
-    en: 'September 2026',
-    zh: '2026 年 9 月',
+    th: 'ตุลาคม 2026',
+    en: 'October 2026',
+    zh: '2026 年 10 月',
   },
 
   // 实际坐标（用于天气 / 日落 API 与地图嵌入）—— 云来观景台（Yun Lai Viewpoint，Wiang Tai, Pai）

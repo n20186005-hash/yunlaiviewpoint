@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Hero from '../../components/Hero.astro';
 import About from '../../components/About.astro';
+import Sunrise from '../../components/Sunrise.astro';
 import Weather from '../../components/Weather.astro';
 import Seasons from '../../components/Seasons.astro';
 import Routes from '../../components/Routes.astro';
@@ -32,6 +33,9 @@ const { lang, messages } = await getI18n(Astro.url);
   <main>
     <Hero lang={lang} messages={messages} />
     <About lang={lang} messages={messages} />
+
+    <!-- 日出攻略：最佳月份、成雾条件、清晨交通与机位 -->
+    <Sunrise messages={messages} />
 
     <!-- 实时天气与未来 7 日预报 -->
     <Weather lang={lang} messages={messages} />

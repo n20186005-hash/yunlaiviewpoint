@@ -174,7 +174,7 @@ const weatherMap = Object.fromEntries(
   </div>
 </section>
 
-<script is:inline define:vars={{ lang, lat: siteConfig.coords.lat, lon: siteConfig.coords.lng, weatherError: hero.weatherError, weatherMap, goldenChanceLabel: hero.goldenChanceLabel }}>
+<script is:inline define:vars={{ lang, lat: siteConfig.coords.lat, lon: siteConfig.coords.lng, weatherError: hero.weatherError, liveOk: hero.liveWeather, weatherMap, goldenChanceLabel: hero.goldenChanceLabel }}>
   (function () {
     // Yun Lai Viewpoint — actual coordinates (Wiang Tai, Pai District, Mae Hong Son, Northern Thailand)
     const LAT = lat, LON = lon;
@@ -242,11 +242,12 @@ const weatherMap = Object.fromEntries(
         if (sEl) sEl.textContent = fmt(ss);
         if (bEl) bEl.textContent = fmt(addMin(ss, 20)) + ' – ' + fmt(addMin(ss, 50));
 
-        if (statusEl) statusEl.textContent = weatherError ? '' : '';
+        if (statusEl) statusEl.textContent = liveOk;
         if (bodyEl) bodyEl.classList.remove('hidden');
       })
       .catch(() => {
-        // keep static default values; do not break the card layout
+        // 取数失败：保留静态默认值，并明确标注实时数据不可用，不要让访客误以为数字是实时的
+        if (statusEl && weatherError) statusEl.textContent = weatherError;
         if (bodyEl) bodyEl.classList.remove('hidden');
       });
   })();

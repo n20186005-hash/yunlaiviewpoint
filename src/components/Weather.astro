@@ -142,14 +142,23 @@ const fallbackReading = (): Reading => {
 };
 
 let reading: Reading;
+// 当构建期无法取得实时数据时使用回退快照；此时页面必须明确提示数据可能过期，
+// 而不是继续标注为“实时更新”（见模板中的 stale 提示条）。
+let stale = false;
 try {
   const response = await fetch(buildRequestUrl(), {
     signal: AbortSignal.timeout(8000),
     headers: { accept: 'application/json' },
   });
-  reading = response.ok ? normalize(await response.json()) : fallbackReading();
+  if (response.ok) {
+    reading = normalize(await response.json());
+  } else {
+    reading = fallbackReading();
+    stale = true;
+  }
 } catch {
   reading = fallbackReading();
+  stale = true;
 }
 
 const ICONS: Record<number, string> = {
@@ -264,6 +273,16 @@ const metrics = [
           <span class="sr-only"> · </span>
           <span data-w="offline">{w.syncNote}</span>
         </p>
+
+        <!-- 构建期取数失败时显示的过期数据提示；客户端刷新成功后由脚本移除 -->
+        {stale && (
+          <p
+            data-w="stale"
+            class="mt-2 rounded-lg border border-amber-300/50 bg-amber-500/10 px-3 py-2 text-xs leading-relaxed text-amber-100/90"
+          >
+            ⚠️ {w.staleNote}
+          </p>
+        )}
 
         <!-- 云海观测指数 -->
         <div class="mt-6">
@@ -449,11 +468,9 @@ const metrics = [
       new Date(`${date}T12:00:00`).toLocaleDateString(cfg.locale, { weekday: 'short' });
 
     const run = async () => {
-      const current = section?.querySelector<HTMLElement>('[data-w="updated"]');
-      const stamp = current?.getAttribute('datetime') ?? '';
-      const ageMinutes = stamp ? (Date.now() - new Date(`${stamp}:00`).getTime()) / 60000 : Infinity;
-      if (ageMinutes < cfg.refreshAfterMinutes) return;
-
+      // 静态构建产物中的读数来自构建时刻，因此每次加载都主动刷新，
+      // 避免访客看到数天前的“实时”数据；刷新成功后移除过期提示条。
+      const staleEl = section?.querySelector<HTMLElement>('[data-w="stale"]');
       try {
         const response = await fetch(url, { headers: { accept: 'application/json' } });
         if (!response.ok) throw new Error('unavailable');
@@ -494,7 +511,9 @@ const metrics = [
         );
         set('updated', clock(String(c.time ?? '')));
         set('offline', '');
-        current?.setAttribute('datetime', String(c.time ?? ''));
+        if (staleEl) staleEl.remove();
+        const updatedEl = section?.querySelector<HTMLElement>('[data-w="updated"]');
+        updatedEl?.setAttribute('datetime', String(c.time ?? ''));
 
         const s = score(minTemp, humidity, wind, cloud);
         const lvl = levelOf(s);

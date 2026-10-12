@@ -1,5 +1,6 @@
 {
   "header": {
+    "sunrise": "Sunrise",
     "weather": "Weather",
     "seasons": "Seasons",
     "routes": "Routes",
@@ -79,12 +80,13 @@
     "syncNote": "Live values replace the last synced reading as soon as your connection is available.",
     "refreshing": "Updating…",
     "offline": "Showing the most recent synced reading.",
+    "staleNote": "Live data is temporarily unavailable — showing a snapshot from the last build. Dates and readings may be out of date.",
     "expandNote": "Swipe the daily strip to see the full week."
   },
   "seasons": {
     "label": "Seasonal planning",
     "heading": "Season-by-Season Visit Strategy",
-    "intro": "A ridge at roughly 1,200 m behaves differently in every season. The table below combines long-term climate averages with field observations from local guides, so you can match your month to the experience you actually want.",
+    "intro": "A high ridge above the Pai basin behaves differently in every season. The table below combines long-term climate averages with field observations from local guides, so you can match your month to the experience you actually want.",
     "basisTitle": "How this table was built",
     "basis": [
       { "title": "Long-term climate averages", "text": "Thirty-year monthly normals for the Pai basin, covering rainfall days together with mean daytime highs and night-time lows." },

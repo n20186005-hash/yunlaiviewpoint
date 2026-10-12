@@ -8,8 +8,9 @@ interface Props {
   title: string;
   description: string;
   messages: Record<string, any>;
+  noIndex?: boolean;
 }
-const { lang, title, description, messages } = Astro.props;
+const { lang, title, description, messages, noIndex = false } = Astro.props;
 const canonical = `${siteConfig.domain}/${lang}/`;
 
 // ---- 单景点 SEO 实体绑定变量（对应配置变量表） ----
@@ -72,15 +73,35 @@ const jsonLd = [
       longitude: entity.longitude,
     },
     hasMap: entity.mapsShareUrl,
+    // 各来源对关闭时间说法不一（17:00–21:00），结构化数据只陈述可核实的开门时间，
+    // 关闭时间以页面可见文字标注“请现场确认”，避免把未核实信息写成事实。
     openingHoursSpecification: [
       {
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
         opens: '05:00',
-        closes: '20:00',
       },
     ],
     sameAs: siteConfig.sameAs,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${siteConfig.domain}/#website`,
+    name: fullName,
+    url: `${siteConfig.domain}/${lang}/`,
+    inLanguage: htmlLang[lang],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': canonical,
+    name: title,
+    description,
+    url: canonical,
+    isPartOf: { '@id': `${siteConfig.domain}/#website` },
+    about: { '@id': `${siteConfig.domain}/#attraction` },
+    inLanguage: htmlLang[lang],
   },
   {
     // 地理面包屑与归属层级：全称 → 城市 → 省 → 国家
@@ -123,6 +144,7 @@ const jsonLd = [
     <!-- TDK -->
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noIndex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
     <meta name="author" content={fullName} />
     <meta name="geo.region" content={entity.countryCode2Letter} />
