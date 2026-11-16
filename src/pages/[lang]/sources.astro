@@ -1,0 +1,23 @@
+---
+import { languagesList, getI18n } from '../../i18n/ui';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Sources from '../../components/Sources.astro';
+import Footer from '../../components/Footer.astro';
+
+export function getStaticPaths() {
+  return languagesList.map((lang) => ({ params: { lang } }));
+}
+
+const { lang, messages } = await getI18n(Astro.url);
+const title = `${messages.sources.heading} | ${messages.meta.title}`;
+const description = messages.sources.intro;
+---
+
+<BaseLayout lang={lang} title={title} description={description} messages={messages} path="sources">
+  <Header lang={lang} messages={messages} />
+  <main class="pt-16 min-h-screen bg-teakDeep">
+    <Sources messages={messages} />
+  </main>
+  <Footer lang={lang} messages={messages} />
+</BaseLayout>
