@@ -143,13 +143,20 @@ const jsonLd = [
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-    <!-- Google tag (gtag.js) — GA4 -->
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-HXM22WWPKP"></script>
+    <!-- GA4 loads only after an explicit analytics choice. -->
     <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-HXM22WWPKP');
+      try {
+        if (localStorage.getItem('yunlai-analytics-consent') === 'accepted') {
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function () { window.dataLayer.push(arguments); };
+          window.gtag('js', new Date());
+          window.gtag('config', 'G-HXM22WWPKP');
+          const analyticsScript = document.createElement('script');
+          analyticsScript.async = true;
+          analyticsScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-HXM22WWPKP';
+          document.head.appendChild(analyticsScript);
+        }
+      } catch (_) { /* analytics remain disabled if storage is unavailable */ }
     </script>
 
     <!-- TDK -->
