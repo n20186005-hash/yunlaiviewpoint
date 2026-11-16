@@ -91,7 +91,7 @@ const weatherMap = Object.fromEntries(
       <!-- 首屏关键信息：门票 / 最佳时段 / 开放时间 / 山路提示 -->
       {hero.facts && (
         <dl class="mt-7 grid sm:grid-cols-2 gap-x-6 gap-y-2 max-w-2xl">
-          {hero.facts.map((f) => (
+          {hero.facts.map((f: any) => (
             <div class="flex items-start gap-2.5 text-sm">
               <span class="text-base leading-6" aria-hidden="true">{f.icon}</span>
               <span class="text-ivory/60 whitespace-nowrap">{f.label}</span>

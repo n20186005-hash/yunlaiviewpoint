@@ -20,7 +20,7 @@ const itineraries = [
     <!-- 按人群定制的游览方案 -->
     <h3 class="mt-12 font-display text-2xl text-teak">{r.audienceTitle}</h3>
     <div class="grid lg:grid-cols-3 gap-5 mt-5">
-      {r.audiences.map((a) => (
+      {r.audiences.map((a: any) => (
         <article class="rounded-2xl bg-white/75 border border-gold/40 p-6 flex flex-col">
           <div class="flex items-center gap-3">
             <span class="text-3xl leading-none" aria-hidden="true">{a.icon}</span>
@@ -89,7 +89,7 @@ const itineraries = [
           </header>
 
           <ol class="timeline mt-6">
-            {data.steps.map((step) => (
+            {data.steps.map((step: any) => (
               <li class="timeline-item">
                 <div class="flex flex-wrap items-baseline gap-x-3">
                   <span
@@ -112,7 +112,7 @@ const itineraries = [
     <!-- 随身清单 -->
     <h3 class="mt-14 font-display text-2xl text-teak">{r.packingTitle}</h3>
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
-      {r.packing.map((p) => (
+      {r.packing.map((p: any) => (
         <div class="rounded-2xl bg-white/70 border border-gold/35 p-4 flex items-start gap-3">
           <span class="text-2xl leading-none" aria-hidden="true">{p.icon}</span>
           <div>

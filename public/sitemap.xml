@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://yunlaiviewpoint.com/th/guides/sunrise-guide/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/en/guides/sunrise-guide/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/zh/guides/sunrise-guide/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/th/guides/getting-there/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/en/guides/getting-there/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/zh/guides/getting-there/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/th/guides/nearby-attractions/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/en/guides/nearby-attractions/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/zh/guides/nearby-attractions/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/th/places/santichon-village/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/en/places/santichon-village/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/zh/places/santichon-village/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/th/places/wat-phra-that-mae-yen/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/en/places/wat-phra-that-mae-yen/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/zh/places/wat-phra-that-mae-yen/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/th/places/pai-canyon/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/en/places/pai-canyon/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/zh/places/pai-canyon/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/th/places/pai-walking-street/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/en/places/pai-walking-street/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/zh/places/pai-walking-street/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/th/places/mo-paeng-waterfall/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/en/places/mo-paeng-waterfall/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/zh/places/mo-paeng-waterfall/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/th/places/wat-nam-hu/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/en/places/wat-nam-hu/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/zh/places/wat-nam-hu/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/th/places/tha-pai-memorial-bridge/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/en/places/tha-pai-memorial-bridge/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/zh/places/tha-pai-memorial-bridge/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/th/places/boon-ko-ku-so-bridge/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/en/places/boon-ko-ku-so-bridge/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yunlaiviewpoint.com/zh/places/boon-ko-ku-so-bridge/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url>
     <loc>https://yunlaiviewpoint.com/th/</loc>
     <xhtml:link rel="alternate" hreflang="th" href="https://yunlaiviewpoint.com/th/"/>

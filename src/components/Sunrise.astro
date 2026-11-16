@@ -15,7 +15,7 @@ const s = messages.sunrise;
     <!-- 云海最佳月份 -->
     <h3 class="font-display text-2xl text-teak mt-12 mb-5">{s.monthsTitle}</h3>
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      {s.months.map((m) => (
+      {s.months.map((m: any) => (
         <div class="rounded-2xl border border-gold/30 bg-white/50 p-5">
           <div class="flex items-center justify-between">
             <span class="font-display text-gold text-xl">{m.tag}</span>
@@ -32,7 +32,7 @@ const s = messages.sunrise;
       <div>
         <h3 class="font-display text-2xl text-teak mb-5">{s.conditionsTitle}</h3>
         <div class="space-y-3">
-          {s.conditions.map((c) => (
+          {s.conditions.map((c: any) => (
             <div class="rounded-xl border border-gold/25 bg-white/50 p-4">
               <div class="font-semibold text-teak">{c.title}</div>
               <p class="mt-1 text-sm text-ink/70">{c.desc}</p>
@@ -45,7 +45,7 @@ const s = messages.sunrise;
       <div>
         <h3 class="font-display text-2xl text-teak mb-5">{s.timelineTitle}</h3>
         <ol class="relative border-l-2 border-gold/40 pl-6 space-y-6">
-          {s.timeline.map((t) => (
+          {s.timeline.map((t: any) => (
             <li class="relative">
               <span class="absolute -left-[31px] top-1 h-3 w-3 rounded-full bg-gold" aria-hidden="true"></span>
               <div class="font-display font-semibold text-teak">
@@ -61,7 +61,7 @@ const s = messages.sunrise;
     <!-- 推荐机位 -->
     <h3 class="font-display text-2xl text-teak mt-14 mb-5">{s.spotsTitle}</h3>
     <div class="grid sm:grid-cols-3 gap-4">
-      {s.spots.map((p) => (
+      {s.spots.map((p: any) => (
         <div class="rounded-2xl border border-gold/25 bg-white/50 p-5">
           <div class="font-display text-teak font-semibold text-lg">{p.name}</div>
           <p class="mt-1 text-sm text-ink/70">{p.desc}</p>
@@ -73,7 +73,7 @@ const s = messages.sunrise;
     <div class="mt-14 rounded-2xl border border-teal-300 bg-teal-50 p-6 max-w-4xl shadow-sm">
       <h3 class="font-display text-xl text-teal-800">{s.bringTitle}</h3>
       <ul class="mt-3 grid sm:grid-cols-2 gap-2 text-sm text-teal-900/85">
-        {s.bring.map((b) => (
+        {s.bring.map((b: any) => (
           <li class="flex gap-2">
             <span class="text-teal-600 mt-0.5" aria-hidden="true">✓</span>
             <span>{b}</span>

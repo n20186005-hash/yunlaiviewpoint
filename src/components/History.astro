@@ -13,7 +13,7 @@ const history = messages.history;
     <p class="mt-4 max-w-2xl text-ivory/80">{history.intro}</p>
 
     <div class="grid md:grid-cols-3 gap-6 mt-12">
-      {history.blocks.map((b, i) => (
+      {history.blocks.map((b: any, i: number) => (
         <div class="rounded-2xl bg-teak/60 border border-gold/20 p-6">
           <div class="font-display text-goldBright text-3xl mb-3">0{i + 1}</div>
           <h3 class="font-display text-xl text-ivory mb-2">{b.title}</h3>
@@ -28,7 +28,7 @@ const history = messages.history;
         <h3 class="font-display text-2xl text-ivory">{history.timelineTitle}</h3>
         <p class="mt-2 max-w-3xl text-sm text-ivory/70">{history.timelineIntro}</p>
         <ol class="timeline mt-6 max-w-3xl">
-          {history.timeline.map((step) => (
+          {history.timeline.map((step: any) => (
             <li class="timeline-item">
               <div class="flex flex-wrap items-baseline gap-x-3">
                 <span class="font-display text-sm text-goldBright">{step.era}</span>

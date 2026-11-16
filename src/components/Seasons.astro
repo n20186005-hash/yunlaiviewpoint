@@ -16,7 +16,7 @@ const s = messages.seasons;
     <div class="mt-10">
       <h3 class="font-display text-xl text-teak">{s.basisTitle}</h3>
       <div class="grid md:grid-cols-3 gap-4 mt-4">
-        {s.basis.map((b) => (
+        {s.basis.map((b: any) => (
           <div class="rounded-2xl border border-gold/40 bg-white/60 p-5">
             <h4 class="font-semibold text-teak">{b.title}</h4>
             <p class="mt-2 text-sm text-ink/75">{b.text}</p>
@@ -40,7 +40,7 @@ const s = messages.seasons;
           </tr>
         </thead>
         <tbody>
-          {s.rows.map((row) => (
+          {s.rows.map((row: any) => (
             <tr>
               <th scope="row" class="font-semibold text-teak whitespace-nowrap">{row.season}</th>
               <td class="whitespace-nowrap text-ink/75">{row.months}</td>
@@ -62,7 +62,7 @@ const s = messages.seasons;
       <div>
         <h3 class="font-display text-xl text-teak">{s.metricsTitle}</h3>
         <dl class="mt-4 space-y-4">
-          {s.metrics.map((m) => (
+          {s.metrics.map((m: any) => (
             <div class="rounded-xl border-l-4 border-gold bg-white/60 px-4 py-3">
               <dt class="font-semibold text-teak">{m.term}</dt>
               <dd class="mt-1 text-sm text-ink/75">{m.text}</dd>
@@ -74,7 +74,7 @@ const s = messages.seasons;
       <div>
         <h3 class="font-display text-xl text-teak">{s.adviceTitle}</h3>
         <div class="mt-4 grid sm:grid-cols-2 gap-4">
-          {s.advice.map((a, i) => (
+          {s.advice.map((a: any, i: number) => (
             <div class="rounded-2xl bg-teak text-ivory p-5">
               <span class="font-display text-goldBright text-sm">{String(i + 1).padStart(2, '0')}</span>
               <h4 class="font-semibold text-goldBright mt-1">{a.title}</h4>

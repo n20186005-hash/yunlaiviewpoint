@@ -1,8 +1,9 @@
 ---
 import { siteConfig } from '../config';
+import type { Lang } from '../i18n/ui';
 
 interface Props {
-  lang: any;
+  lang: Lang;
   messages: Record<string, any>;
 }
 const { lang, messages } = Astro.props;
@@ -22,7 +23,7 @@ const mapsUrl = siteConfig.mapsUrl;
       <div>
         <div class="text-xs uppercase tracking-wider text-gold mb-3">{footer.navTitle}</div>
         <ul class="grid grid-cols-2 gap-2 text-sm">
-          {footer.navItems.map((n) => (
+          {footer.navItems.map((n: any) => (
             <li><a href={n.href} class="text-ivory/80 hover:text-goldBright transition-colors">{n.label}</a></li>
           ))}
         </ul>
@@ -47,7 +48,7 @@ const mapsUrl = siteConfig.mapsUrl;
       <div class="text-xs uppercase tracking-wider text-gold mb-3">{footer.sourcesTitle}</div>
       <p class="text-sm text-ivory/70 max-w-2xl mb-4">{footer.sourcesNote}</p>
       <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3 text-sm">
-        {siteConfig.sources.map((s) => (
+        {siteConfig.sources.map((s: any) => (
           <li>
             <a
               href={s.url}

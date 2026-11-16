@@ -21,7 +21,7 @@ const stars = (r: string) => {
     <p class="mt-4 max-w-2xl text-ivory/80">{reviews.intro}</p>
 
     <div class="mt-8 flex flex-wrap items-center gap-4">
-      <span class="stars text-2xl">{stars(siteConfig.rating)}</span>
+      <span class="stars text-2xl">{stars(String(siteConfig.rating))}</span>
       <span class="font-display text-2xl text-goldBright">{siteConfig.rating}</span>
       <span class="text-ivory/70">({siteConfig.reviewCount}) · {reviews.disclaimer}</span>
     </div>

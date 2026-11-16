@@ -31,7 +31,7 @@ const country: string = entity.country[lang];
     <p class="mt-1 text-xs text-ink/50">{gallery.imageCopyright}</p>
 
     <div class="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 auto-rows-[180px]">
-      {Array.from({ length: count }).map((_, i) => {
+      {Array.from({ length: count }).map((_: any, i: number) => {
         const big = i === 0; // first photo spans larger
         return (
           <div class={`photo-frame rounded-xl ${big ? 'col-span-2 row-span-2' : ''}`}>

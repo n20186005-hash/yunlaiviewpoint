@@ -1,0 +1,94 @@
+---
+import { languagesList, getI18n, type Lang } from '../../../i18n/ui';
+import { guides, guideLabels } from '../../../data/guides';
+import { siteConfig } from '../../../config';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Footer from '../../../components/Footer.astro';
+import Header from '../../../components/Header.astro';
+import ExploreGuides from '../../../components/ExploreGuides.astro';
+import { Image } from 'astro:assets';
+import { heroImage } from '../../../assets/gallery/images';
+import { places } from '../../../data/places';
+
+export function getStaticPaths() {
+  return languagesList.flatMap(lang => guides.map(guide => ({ params: { lang, slug: guide.slug }, props: { guide } })));
+}
+const { guide } = Astro.props;
+const { lang, messages } = await getI18n(Astro.url);
+const labels = guideLabels[lang as Lang];
+const copy = guide.copy[lang as Lang];
+const isMain = guide.slug !== 'nearby-attractions';
+const mapUrl = isMain ? siteConfig.mapsUrl : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(guide.mapQuery)}`;
+const address = isMain ? siteConfig.address : 'Santichon Village, Wiang Tai, Pai, Mae Hong Son 58130, Thailand';
+const src = 'https://www.tourismthailand.org/Articles/thailand-december';
+const management: Record<string, Record<Lang, string>> = {
+  'sunrise-guide': {
+    en: 'Yun Lai Viewpoint is operated as a visitor lookout by the Santichon Village community above Pai. Its viewing facilities and small visitor fee support the local visitor operation. The hillside is closely connected to the Yunnanese-influenced settlement below; changing access details should be checked with the local operators.',
+    th: 'จุดชมวิวหยุนไหลเป็นแหล่งชมวิวที่ชุมชนหมู่บ้านสันติชลดูแล มีสิ่งอำนวยความสะดวกและค่าบริการสำหรับผู้มาเยือน พื้นที่บนเนินเชื่อมโยงกับชุมชนวัฒนธรรมจีนยูนนานด้านล่าง ควรสอบถามการเข้าชมล่าสุดกับผู้ดูแลในพื้นที่',
+    zh: '云来观景台由拜县 Santichon（云南村）社区经营维护，观景设施及少量游客费用与当地社区旅游服务有关。山顶景观与山下云南华人文化村相互联系；具体开放及通行安排应以社区现场公告为准。',
+  },
+  'getting-there': {
+    en: 'The viewpoint above Santichon is locally operated by the village community, while the approach roads are part of the wider Pai transport network. A small community visitor fee has been reported. Transport services are independently arranged; confirm fares and road access with each provider.',
+    th: 'จุดชมวิวเหนือหมู่บ้านสันติชลดูแลโดยชุมชน ส่วนถนนทางขึ้นเป็นส่วนหนึ่งของเส้นทางในอำเภอปาย เคยมีการเก็บค่าดูแลพื้นที่เล็กน้อย ผู้ให้บริการรถเป็นผู้ประกอบการแยกต่างหาก ควรตกลงราคาและเส้นทางก่อนเดินทาง',
+    zh: '云南村上方的云来观景设施由当地社区运营；通往景点的道路属于更广泛的拜县交通网络。此前有收取少量社区维护费的记录。包车、接驳等由不同经营者提供，费用和可通行情况应分别核对。',
+  },
+  'nearby-attractions': {
+    en: 'This itinerary connects several independently operated places. Santichon’s community visitor facilities, the active Buddhist temples and outdoor Pai Canyon do not share one management body. Respect each place’s own staff, religious etiquette, signs and access rules.',
+    th: 'เส้นทางนี้เชื่อมสถานที่ที่มีผู้ดูแลแตกต่างกัน กิจกรรมของชุมชนสันติชล วัดพุทธที่ใช้งานจริง และพื้นที่ธรรมชาติกองแลนไม่ได้มีผู้ดำเนินการรายเดียวกัน ควรปฏิบัติตามป้ายและข้อกำหนดของแต่ละแห่ง',
+    zh: '本路线串联不同管理性质的地点。云南村社区设施、仍在使用的佛教寺庙，以及拜县峡谷自然游览区域，并不由同一机构管理。游客应分别遵守各处的现场指引、宗教礼仪和通行规则。',
+  },
+};
+const nearbyPlaces = [
+  { name: { en: 'Santichon Village', th: 'หมู่บ้านสันติชล', zh: '云南村' }, query: 'Santichon Village Pai Mae Hong Son Thailand' },
+  { name: { en: 'Wat Nam Hu', th: 'วัดน้ำฮู', zh: '南湖寺' }, query: 'Wat Nam Hu Pai Mae Hong Son Thailand' },
+  { name: { en: 'Wat Phra That Mae Yen', th: 'วัดพระธาตุแม่เย็น', zh: '美茵寺' }, query: 'Wat Phra That Mae Yen Pai Mae Hong Son Thailand' },
+  { name: { en: 'Pai Canyon', th: 'กองแลน ปายแคนยอน', zh: '拜县峡谷' }, query: 'Pai Canyon Pai Mae Hong Son Thailand' },
+  { name: { en: 'Tha Pai Memorial Bridge', th: 'สะพานประวัติศาสตร์ท่าปาย', zh: '拜县纪念桥' }, query: 'Tha Pai Memorial Bridge 7FW8+X2F Mae Hi Pai Thailand' },
+  { name: { en: 'Boon Ko Ku So Bridge', th: 'สะพานบุญโขกู้โส่', zh: '功德竹桥' }, query: 'Boon Ko Ku So Bamboo Bridge 89FV+273 Thung Yao Pai Thailand' },
+  { name: { en: 'Mo Paeng Waterfall', th: 'น้ำตกหมอแปง', zh: '摩潘瀑布' }, query: 'Mo Paeng Waterfall Pai Thailand' },
+];
+---
+<BaseLayout lang={lang} messages={messages} title={`${copy.title} | ${siteConfig.name[lang]}`} description={copy.intro} path={`guides/${guide.slug}`} pageFaqs={copy.faq}>
+  <Header lang={lang} messages={messages} />
+  <main class="pt-16 bg-teakDeep text-ivory">
+    <section class="bg-teak py-16 md:py-24 border-b border-gold/20">
+      <div class="max-w-5xl mx-auto px-5">
+        <a href={`/${lang}/`} class="text-goldBright text-sm hover:underline">← {labels.back}</a>
+        <p class="uppercase text-gold tracking-widest text-sm mt-10 mb-4">Yun Lai / Pai / Mae Hong Son</p>
+        <h1 class="font-display text-4xl md:text-5xl text-goldBright leading-tight mb-5">{copy.title}</h1>
+        <p class="text-lg leading-relaxed text-ivory/80 max-w-3xl">{copy.intro}</p>
+        <div class="mt-7 flex flex-wrap gap-3 text-sm">
+          <a href={mapUrl} target="_blank" rel="noopener noreferrer" class="px-5 py-3 bg-gold text-teak rounded-full font-semibold">{labels.map} ↗</a>
+          <a href="#essentials" class="px-5 py-3 border border-gold/50 text-goldBright rounded-full">{labels.facts} ↓</a>
+        </div>
+      </div>
+    </section>
+    <div class="bg-teakDeep max-w-5xl mx-auto px-5 pt-10">
+      <figure class="overflow-hidden rounded-2xl border border-gold/20">
+        <Image src={heroImage} alt="Yun Lai Viewpoint landscape above Pai valley" widths={[640, 960, 1440]} sizes="(max-width: 768px) 100vw, 1024px" class="w-full max-h-[460px] object-cover" />
+        <figcaption class="text-xs text-ivory/60 px-5 py-3">{lang === 'zh' ? '云来观景台实景；周边地点请以各自地图定位为准。' : lang === 'th' ? 'ภาพจริงของจุดชมวิวหยุนไหล โปรดใช้หมุดแผนที่แยกสำหรับสถานที่อื่น' : 'Existing Yun Lai Viewpoint photograph; navigate separately for other nearby places.'}</figcaption>
+      </figure>
+    </div>
+    <section class="py-14 bg-teakDeep">
+      <div class="max-w-5xl mx-auto px-5 grid md:grid-cols-3 gap-9 items-start">
+        <div class="md:col-span-2">
+          <h2 class="font-display text-3xl text-goldBright mb-5">{labels.management}</h2>
+          <p class="leading-relaxed text-ivory/80">{management[guide.slug][lang]}</p>
+        </div>
+        <aside id="essentials" class="rounded-xl bg-teak p-6 border border-gold/20">
+          <h3 class="font-display text-xl text-goldBright mb-5">{labels.facts}</h3>
+          <dl class="space-y-4 text-sm"><div><dt class="text-gold">{labels.location}</dt><dd class="mt-1">{address}</dd></div><div><dt class="text-gold">{labels.hours}</dt><dd class="mt-1">{lang === 'zh' ? '日出前可规划抵达；当天现场核实' : lang === 'th' ? 'วางแผนมาถึงก่อนพระอาทิตย์ขึ้น ตรวจเวลาในพื้นที่' : 'Plan for pre-sunrise arrival; verify locally'}</dd></div><div><dt class="text-gold">{labels.cost}</dt><dd class="mt-1">{lang === 'zh' ? '观景台过往约 ฿20；以现场为准' : lang === 'th' ? 'จุดชมวิวเคยมีค่าเข้าประมาณ ฿20 โปรดตรวจที่หน้างาน' : 'Viewpoint previously reported at ~฿20; verify on arrival'}</dd></div></dl>
+        </aside>
+      </div>
+    </section>
+    <section class="py-16 bg-teak"><div class="max-w-5xl mx-auto px-5 grid md:grid-cols-2 gap-7">
+      {copy.sections.map((section, i) => <article class="rounded-xl bg-teakDeep p-7 border border-gold/10"><span class="text-gold text-sm">0{i+1}</span><h2 class="font-display text-2xl text-goldBright my-3">{section.heading}</h2><p class="leading-relaxed text-ivory/80">{section.body}</p></article>)}
+    </div></section>
+    {guide.slug === 'nearby-attractions' && <section class="pb-14 bg-teak"><div class="max-w-5xl mx-auto px-5"><h2 class="font-display text-2xl text-goldBright mb-5">{labels.map}</h2><div class="grid sm:grid-cols-2 gap-4">{nearbyPlaces.map(place => <a class="rounded-xl border border-gold/30 p-5 hover:border-gold text-goldBright" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.query)}`} target="_blank" rel="noopener noreferrer">{place.name[lang]} ↗</a>)}</div></div></section>}
+    {guide.slug === 'nearby-attractions' && <section class="bg-teak pb-16"><div class="max-w-5xl mx-auto px-5"><h2 class="font-display text-2xl text-goldBright mb-5">{labels.related}</h2><div class="grid md:grid-cols-3 gap-4">{places.map(place => <a href={`/${lang}/places/${place.slug}/`} class="rounded-xl bg-teakDeep overflow-hidden border border-gold/20 hover:border-gold"><img src={place.image} alt={place.local[lang].title} width="960" height="720" class="w-full aspect-[16/10] object-cover" loading="lazy"/><div class="p-5 text-goldBright">{place.local[lang].title} →</div></a>)}</div></div></section>}
+    <section class="py-16"><div class="max-w-5xl mx-auto px-5"><h2 class="font-display text-3xl text-goldBright mb-7">{labels.itinerary}</h2><ol class="grid md:grid-cols-3 gap-5">{copy.tips.map((tip, i) => <li class="rounded-xl border border-gold/25 p-6"><strong class="text-goldBright">{i+1}.</strong><p class="mt-3 leading-relaxed">{tip}</p></li>)}</ol></div></section>
+    <section class="py-16 bg-teak"><div class="max-w-5xl mx-auto px-5"><h2 class="font-display text-3xl text-goldBright mb-7">{labels.faq}</h2>{copy.faq.map(f => <div class="border-b border-gold/20 py-5"><h3 class="text-lg font-semibold text-goldBright mb-2">{f.q}</h3><p class="text-ivory/80">{f.a}</p></div>)}<div class="mt-9 text-sm text-ivory/60">{lang === 'zh' ? '资料参考：泰国国家旅游局与 Google 地图。票价、道路和开放时间会变化，请出发前核实。' : lang === 'th' ? 'อ้างอิง: การท่องเที่ยวแห่งประเทศไทยและ Google Maps เวลาเปิด ค่าเข้าและถนนอาจเปลี่ยนแปลงได้' : 'References: Tourism Authority of Thailand and Google Maps. Hours, fees and road conditions can change.'} <a href={src} class="text-goldBright underline" target="_blank" rel="noopener">TAT ↗</a></div></div></section>
+    <ExploreGuides lang={lang} />
+  </main>
+  <Footer lang={lang} messages={messages} />
+</BaseLayout>

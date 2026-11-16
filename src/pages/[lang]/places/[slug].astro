@@ -1,0 +1,59 @@
+---
+import { languagesList, getI18n, type Lang } from '../../../i18n/ui';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { siteConfig } from '../../../config';
+import { places } from '../../../data/places';
+import { guideLabels } from '../../../data/guides';
+
+export function getStaticPaths() {
+  return languagesList.flatMap(lang => places.map(place => ({ params: { lang, slug: place.slug }, props: { place } })));
+}
+const { place } = Astro.props;
+const { lang, messages } = await getI18n(Astro.url);
+const t = place.local[lang as Lang];
+const labels = guideLabels[lang as Lang];
+const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.mapsQuery)}`;
+const langText = {
+  en: { highlights: 'Highlights and what to observe', history: 'History and cultural setting', architecture: 'Architecture and landscape', access: 'Getting here', photo: 'Photography viewpoints', notes: 'Visitor guidelines', stay: 'Where to stay', source: 'Photo source and fact checking', planning: 'Suggested visit', details: 'Local arrangements vary. Check current hours and admission at the site.', review: 'Visitor reviews', reviewText: 'For up-to-date visitor feedback and review counts, consult the specific Google Maps place listing. This guide does not reproduce unverified scores.', links: 'Nearby route and related attractions', discover: 'Discover this place', advice: 'Visit tips', feature: 'What makes it distinctive', mapGuide: 'Directions and map', accessNotes: 'Use this attraction’s own destination pin; confirm the final approach and transport arrangements before departure.' },
+  th: { highlights: 'จุดเด่นและสิ่งที่ควรสังเกต', history: 'ประวัติและวัฒนธรรม', architecture: 'สถาปัตยกรรมและภูมิประเทศ', access: 'การเดินทาง', photo: 'มุมถ่ายภาพ', notes: 'ข้อควรปฏิบัติ', stay: 'ที่พักแนะนำ', source: 'แหล่งภาพและการตรวจสอบข้อมูล', planning: 'เส้นทางเที่ยวแนะนำ', details: 'เวลาและค่าเข้าอาจเปลี่ยนแปลง โปรดตรวจสอบในพื้นที่', review: 'รีวิวผู้เยี่ยมชม', reviewText: 'ดูคะแนน จำนวนรีวิว และความเห็นล่าสุดจากหมุดสถานที่นั้นโดยตรงใน Google Maps คู่มือนี้ไม่แสดงคะแนนที่ยังไม่ได้ตรวจสอบ', links: 'เส้นทางและสถานที่ใกล้เคียง', discover: 'ทำความรู้จักสถานที่', advice: 'คำแนะนำการเที่ยว', feature: 'เสน่ห์เฉพาะแห่ง', mapGuide: 'แผนที่และการเดินทาง', accessNotes: 'ใช้หมุดสถานที่นี้โดยตรง ตรวจสอบเส้นทางช่วงสุดท้ายและรถก่อนออกเดินทาง' },
+  zh: { highlights: '特色与观察重点', history: '历史与文化背景', architecture: '建筑与地形特色', access: '交通方式', photo: '拍照机位', notes: '游览须知', stay: '住宿建议', source: '图片与事实来源', planning: '建议游览路线', details: '运营时间与收费可能变化，出发前请现场核实', review: '游客评价', reviewText: '请通过该景点独立 Google 地图地点页查看最新评分、评论数量与访客反馈；本站不显示未经同步核实的分数。', links: '周边路线与相关景点', discover: '探索景点', advice: '游览建议', feature: '景点独特魅力', mapGuide: '交通指南与地图', accessNotes: '请使用此景点自己的地图地点链接；出发前核对最后一段道路和交通安排。' },
+}[lang as Lang];
+const info = [
+  [labels.location, place.address], [labels.hours, place.hours[lang as Lang]], [labels.cost, place.admission[lang as Lang]],
+  [langText.access, t.access],
+];
+---
+<BaseLayout lang={lang} messages={messages} title={`${t.title} | ${siteConfig.name[lang]}`} description={t.intro} path={`places/${place.slug}`} pageFaqs={t.faq} placeEntity={{ name: t.title, address: place.address, mapsUrl: mapUrl, image: place.image }}>
+  <Header lang={lang} messages={messages} />
+  <main class="pt-16 bg-teakDeep text-ivory">
+    <section class="bg-teak py-16 md:py-20">
+      <div class="max-w-6xl mx-auto px-5 grid lg:grid-cols-2 gap-9 items-center">
+        <div>
+          <a class="text-goldBright text-sm hover:underline" href={`/${lang}/guides/nearby-attractions/`}>← {langText.links}</a>
+          <p class="text-gold tracking-widest text-xs uppercase mt-10 mb-3">Pai · Mae Hong Son · Thailand</p>
+          <h1 class="font-display text-4xl md:text-5xl text-goldBright leading-tight">{t.title}</h1>
+          <p class="font-display text-lg text-gold mt-4">{t.tagline}</p>
+          <p class="mt-6 text-ivory/80 leading-relaxed">{t.intro}</p>
+          <div class="mt-6 space-y-2 text-sm text-ivory/80"><p><span class="text-goldBright">{labels.hours}：</span>{place.hours[lang as Lang]}</p><p><span class="text-goldBright">{labels.location}：</span>{place.address}</p></div>
+          <div class="flex flex-wrap gap-3 mt-7"><a href={mapUrl} target="_blank" rel="noopener noreferrer" class="rounded-full bg-gold text-teak font-semibold px-5 py-3">{labels.map} ↗</a><a href="#essentials" class="rounded-full border border-gold/40 text-goldBright px-5 py-3">{labels.facts} ↓</a></div>
+        </div>
+        <figure class="overflow-hidden rounded-2xl border border-gold/20"><img src={place.image} alt={t.title} width="960" height="720" class="w-full aspect-[4/3] object-cover" loading="eager" /><figcaption class="text-xs text-ivory/60 py-2 px-4">{langText.source}: Wikimedia Commons</figcaption></figure>
+      </div>
+    </section>
+    <section class="py-16"><div class="max-w-6xl mx-auto px-5 grid md:grid-cols-3 gap-9">
+      <div class="md:col-span-2"><h2 class="font-display text-3xl text-goldBright mb-5">{labels.management}</h2><p class="leading-loose text-ivory/80">{t.about}</p><p class="mt-5 text-ivory/75 leading-loose">{t.history}</p></div>
+      <aside id="essentials" class="bg-teak border border-gold/20 rounded-2xl p-6"><h2 class="font-display text-2xl text-goldBright mb-5">{labels.facts}</h2><dl class="space-y-5">{info.map(([key, value]) => <div><dt class="text-gold font-semibold text-sm">{key}</dt><dd class="mt-1 text-sm leading-relaxed">{value}</dd></div>)}</dl><p class="text-xs text-ivory/60 mt-5">{langText.details}</p></aside>
+    </div></section>
+    <section class="bg-teakDeep py-12 border-b border-gold/10"><div class="max-w-6xl mx-auto px-5"><h2 class="font-display text-2xl text-goldBright mb-3">{langText.discover}</h2><p class="text-ivory/80 leading-loose max-w-4xl">{t.intro} {t.highlights}</p><div class="mt-6 grid md:grid-cols-2 gap-5"><div class="border-l-2 border-gold px-5"><h3 class="text-goldBright font-semibold mb-2">{langText.advice}</h3><p class="text-ivory/80">{t.cautions}</p></div><div class="border-l-2 border-gold px-5"><h3 class="text-goldBright font-semibold mb-2">{langText.feature}</h3><p class="text-ivory/80">{t.architecture}</p></div></div></div></section>
+    <section class="bg-teak py-14"><div class="max-w-6xl mx-auto px-5 grid md:grid-cols-3 gap-6"><article class="bg-teakDeep rounded-xl p-6"><h2 class="text-xl text-goldBright font-display mb-3">{labels.hours}</h2><p class="text-ivory/80 leading-relaxed">{place.hours[lang as Lang]}</p></article><article class="bg-teakDeep rounded-xl p-6"><h2 class="text-xl text-goldBright font-display mb-3">{labels.cost}</h2><p class="text-ivory/80 leading-relaxed">{place.admission[lang as Lang]}</p></article><article class="bg-teakDeep rounded-xl p-6"><h2 class="text-xl text-goldBright font-display mb-3">{langText.access}</h2><p class="text-ivory/80 leading-relaxed">{t.access}</p></article></div></section>
+    <section class="bg-teak py-16"><div class="max-w-6xl mx-auto px-5"><h2 class="font-display text-3xl text-goldBright mb-8">{langText.highlights}</h2><div class="grid md:grid-cols-2 gap-5">{[[langText.history,t.history],[langText.architecture,t.architecture],[langText.highlights,t.highlights],[langText.access,t.access]].map(([title,body],i) => <article class="rounded-2xl bg-teakDeep border border-gold/15 p-7"><span class="text-gold text-xs">0{i+1}</span><h3 class="font-display text-xl text-goldBright my-3">{title}</h3><p class="leading-relaxed text-ivory/80">{body}</p></article>)}</div></div></section>
+    <section class="py-16"><div class="max-w-6xl mx-auto px-5"><h2 class="font-display text-3xl text-goldBright mb-8">{langText.planning}</h2><ol class="grid md:grid-cols-3 gap-4">{t.itinerary.map((step,i) => <li class="rounded-xl border border-gold/25 p-6"><span class="font-display text-2xl text-goldBright">{i+1}</span><p class="mt-3 leading-relaxed">{step}</p></li>)}</ol></div></section>
+    <section class="bg-teak py-16"><div class="max-w-6xl mx-auto px-5 grid md:grid-cols-3 gap-7">{[[langText.notes,t.cautions],[langText.photo,t.photos],[langText.stay,t.stay]].map(([head,body]) => <article><h2 class="font-display text-2xl text-goldBright mb-4">{head}</h2><p class="text-ivory/80 leading-relaxed">{body}</p></article>)}</div></section>
+    <section class="py-16"><div class="max-w-6xl mx-auto px-5"><h2 class="font-display text-3xl text-goldBright mb-6">{labels.faq}</h2>{t.faq.map(item => <article class="py-5 border-b border-gold/20"><h3 class="text-goldBright text-lg font-semibold mb-2">{item.q}</h3><p class="text-ivory/80">{item.a}</p></article>)}<h2 class="font-display text-2xl text-goldBright mt-10 mb-3">{langText.review}</h2><p class="text-ivory/80 max-w-3xl">{langText.reviewText}</p><a class="inline-block mt-4 text-goldBright underline" href={mapUrl} target="_blank" rel="noopener noreferrer">Google Maps ↗</a></div></section>
+    <section class="bg-teakDeep py-14 border-t border-gold/20"><div class="max-w-6xl mx-auto px-5"><h2 class="font-display text-2xl text-goldBright mb-4">{langText.mapGuide}</h2><p class="text-ivory/80 mb-2">{place.address}</p><p class="text-ivory/70 mb-5">{langText.accessNotes}</p><a class="inline-flex rounded-full bg-gold text-teak font-semibold px-6 py-3" href={mapUrl} target="_blank" rel="noopener noreferrer">{labels.map} ↗</a></div></section>
+    <section class="bg-teak py-14"><div class="max-w-6xl mx-auto px-5"><h2 class="font-display text-2xl text-goldBright mb-4">{langText.links}</h2><div class="flex flex-wrap gap-4">{places.filter(p => p.slug !== place.slug).map(p => <a href={`/${lang}/places/${p.slug}/`} class="p-4 rounded-xl border border-gold/30 text-goldBright hover:border-gold">{p.local[lang as Lang].title} →</a>)}<a href={`/${lang}/guides/nearby-attractions/`} class="p-4 rounded-xl border border-gold/30 text-goldBright">{labels.related} →</a></div><p class="mt-6 text-xs text-ivory/60">{langText.source}: <a href={place.imageSource} class="underline" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a> · <a href="https://thai.tourismthailand.org/Attraction/หมู่บ้านสันติชล" class="underline" target="_blank" rel="noopener noreferrer">Tourism Authority of Thailand</a></p></div></section>
+  </main>
+  <Footer lang={lang} messages={messages} />
+</BaseLayout>
