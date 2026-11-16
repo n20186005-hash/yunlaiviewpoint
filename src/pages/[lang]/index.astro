@@ -16,7 +16,6 @@ import Guide from '../../components/Guide.astro';
 import Food from '../../components/Food.astro';
 import Gallery from '../../components/Gallery.astro';
 import Reviews from '../../components/Reviews.astro';
-import Sources from '../../components/Sources.astro';
 import MapSection from '../../components/MapSection.astro';
 import Footer from '../../components/Footer.astro';
 import ExploreGuides from '../../components/ExploreGuides.astro';
@@ -60,7 +59,6 @@ const { lang, messages } = await getI18n(Astro.url);
     <Food messages={messages} />
     <Gallery lang={lang} messages={messages} />
     <Reviews messages={messages} />
-    <Sources messages={messages} />
     <MapSection lang={lang} messages={messages} />
   </main>
   <Footer lang={lang} messages={messages} />
