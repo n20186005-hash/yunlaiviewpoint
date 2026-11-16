@@ -8,7 +8,7 @@ interface Props {
 }
 const { lang, messages } = Astro.props;
 const h = messages.header;
-const onSubpage = Astro.url.pathname.includes('/guides/') || Astro.url.pathname.includes('/places/');
+const onSubpage = Astro.url.pathname.includes('/guides/') || Astro.url.pathname.includes('/places/') || Astro.url.pathname.includes('/sources') || Astro.url.pathname.includes('/privacy-policy') || Astro.url.pathname.includes('/terms-of-service') || Astro.url.pathname.includes('/cookie-settings');
 
 const navItems = [
   { label: h.home, href: '#home' },
@@ -26,6 +26,7 @@ const navItems = [
   { label: h.gallery, href: '#gallery' },
   { label: h.reviews, href: '#reviews' },
   { label: h.map, href: '#map' },
+  { label: lang === 'th' ? 'แหล่งข้อมูล' : lang === 'zh' ? '资料来源' : 'Sources', href: `/${lang}/sources/` },
 ];
 
 const switchTo = (target: Lang) => onSubpage ? Astro.url.pathname.replace(/^\/(th|en|zh)\//, `/${target}/`) : `/${target}/`;
