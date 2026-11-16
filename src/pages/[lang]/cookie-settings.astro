@@ -1,37 +1,62 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import th from '../../i18n/th.json';
-import en from '../../i18n/en.json';
-import zh from '../../i18n/zh.json';
-import { languagesList } from '../../i18n/ui';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { languagesList, getI18n } from '../../i18n/ui';
 
 export function getStaticPaths() {
   return languagesList.map((lang) => ({ params: { lang } }));
 }
-
-const { lang } = Astro.params;
-const m = { th, en, zh }[lang];
-const legal = m.legal.cookies;
-const meta = { title: `${legal.title} — ${m.footer.brand.name}`, description: legal.title };
+const { lang, messages } = await getI18n(Astro.url);
+const legal = messages.legal.cookies;
+const allow = lang === 'zh' ? '允许分析 Cookie' : lang === 'th' ? 'ยอมรับคุกกี้วิเคราะห์' : 'Allow analytics cookies';
+const decline = lang === 'zh' ? '拒绝分析 Cookie' : lang === 'th' ? 'ปฏิเสธคุกกี้วิเคราะห์' : 'Reject analytics cookies';
+const currentLabel = lang === 'zh' ? '当前选择：' : lang === 'th' ? 'ตัวเลือกปัจจุบัน: ' : 'Current choice: ';
+const unset = lang === 'zh' ? '尚未选择（分析已关闭）' : lang === 'th' ? 'ยังไม่ได้เลือก (ปิดการวิเคราะห์)' : 'Not chosen (analytics disabled)';
+const saved = lang === 'zh' ? '设置已保存，正在应用。' : lang === 'th' ? 'บันทึกการตั้งค่าแล้ว กำลังใช้ค่าใหม่' : 'Preference saved. Applying settings.';
 ---
-<BaseLayout lang={lang} title={meta.title} description={meta.description} messages={m} noIndex>
-  <main class="mx-auto max-w-3xl px-4 py-24">
-    <a href={`/${lang}/`} class="text-amber-600 hover:underline">← {m.header.home}</a>
-    <h1 class="mt-4 text-3xl font-bold text-stone-800">{legal.title}</h1>
-    <p class="mt-2 text-sm text-stone-500">{legal.updated}</p>
-    <p class="mt-4 text-stone-700 leading-relaxed">{legal.intro}</p>
-    <div class="mt-6 space-y-4">
-      {legal.categories.map((c) => (
-        <section class="rounded-xl border border-stone-200 p-5">
-          <div class="flex items-center justify-between">
-            <h2 class="text-lg font-semibold text-stone-800">{c.h}</h2>
-            <span class="rounded-full bg-amber-100 px-3 py-1 text-xs font-medium text-amber-700">{c.status}</span>
-          </div>
-          <p class="mt-2 text-stone-700">{c.p}</p>
-          <p class="mt-2 text-sm text-stone-500">{c.subStatus}</p>
-        </section>
-      ))}
-    </div>
-    <p class="mt-6 text-sm text-stone-500">{legal.consent}</p>
+<BaseLayout lang={lang} title={`${legal.title} | ${messages.meta.title}`} description={legal.intro} messages={messages} path="cookie-settings">
+  <Header lang={lang} messages={messages} />
+  <main class="min-h-screen bg-ivory pt-28 pb-20">
+    <article class="mx-auto max-w-3xl px-5 text-ink/85 leading-relaxed">
+      <h1 class="font-display text-3xl md:text-4xl text-teak">{legal.title}</h1>
+      <p class="mt-3 text-sm text-ink/60">{legal.updated}</p>
+      <p class="mt-8">{legal.intro}</p>
+      <div class="mt-8 space-y-5">
+        {legal.categories.map((category: { h: string; p: string; subStatus: string }) => (
+          <section class="rounded-2xl border border-teak/20 bg-white/60 p-6">
+            <h2 class="font-display text-xl text-teak">{category.h}</h2>
+            <p class="mt-2">{category.p}</p>
+            <p class="mt-2 text-sm text-ink/60">{category.subStatus}</p>
+          </section>
+        ))}
+      </div>
+      <p class="mt-8">{legal.consent}</p>
+      <p id="cookie-choice" role="status" aria-live="polite" class="mt-5 font-semibold text-teak" data-prefix={currentLabel} data-unset={unset} data-allow={allow} data-decline={decline} data-saved={saved}>{currentLabel}{unset}</p>
+      <div class="mt-5 flex flex-wrap gap-3">
+        <button type="button" id="allow-analytics" class="rounded-full bg-teak px-6 py-3 text-sm font-semibold text-ivory hover:opacity-90">{allow}</button>
+        <button type="button" id="reject-analytics" class="rounded-full border border-teak/40 px-6 py-3 text-sm font-semibold text-teak hover:bg-teak/10">{decline}</button>
+      </div>
+    </article>
   </main>
+  <Footer lang={lang} messages={messages} />
+  <script is:inline>
+    const choice = document.getElementById('cookie-choice');
+    const key = 'yunlai-analytics-consent';
+    function updateChoice() {
+      if (!choice) return;
+      const stored = localStorage.getItem(key);
+      choice.textContent = choice.dataset.prefix + (stored === 'accepted' ? choice.dataset.allow : stored === 'rejected' ? choice.dataset.decline : choice.dataset.unset);
+    }
+    try { updateChoice(); } catch (_) {}
+    function saveChoice(value) {
+      try {
+        localStorage.setItem(key, value);
+        updateChoice();
+        window.location.reload();
+      } catch (_) { if (choice) choice.textContent = choice.dataset.saved; }
+    }
+    document.getElementById('allow-analytics')?.addEventListener('click', () => saveChoice('accepted'));
+    document.getElementById('reject-analytics')?.addEventListener('click', () => saveChoice('rejected'));
+  </script>
 </BaseLayout>
